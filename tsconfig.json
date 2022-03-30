@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.paths.json",
+  "compilerOptions": {
+    "lib": [ "es5", "es6" ],
+    "sourceMap": true,
+    "target": "es2017",
+    "outDir": "./dist",
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "strict": true
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+}

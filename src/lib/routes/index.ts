@@ -1,0 +1,47 @@
+import {
+  CommonStatusCode,
+  getErrorItems,
+  initializeMiddleWare,
+  IRequest,
+  IResponse,
+} from "@/lib";
+import { Application, NextFunction } from "express";
+import * as _ from "lodash";
+import RouteItems, { RouteItemType } from "./items";
+
+export default (app: Application): void => {
+  RouteItems.forEach((item: RouteItemType) => {
+    app[item.method](
+      item.path,
+      (request: IRequest, response: IResponse, next: NextFunction) =>
+        initializeMiddleWare(request, response, next, item),
+      async (request: IRequest, response: IResponse) => {
+        try {
+          const result = await item.next(request, response);
+          console.log(`SUCCESS_${_.toUpper(item.method)}_${item.path}`);
+
+          /**
+           * 새로 생성된 토큰이 있으면 요청에 대한 응답 + 새로운 토큰 발급
+           */
+          if (!_.isUndefined(request.newToken)) {
+            response.status(CommonStatusCode.CREATE);
+            response.send({
+              token: request.newToken,
+              item: result,
+            });
+          } else {
+            response.send({
+              item: result,
+            });
+          }
+        } catch (error: unknown) {
+          const _error = getErrorItems(error);
+          console.log(`ERROR_${_.toUpper(item.method)}_${item.path}`);
+          console.log(_error);
+          response.status(_error.status);
+          response.send(_error);
+        }
+      }
+    );
+  });
+};
