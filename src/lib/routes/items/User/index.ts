@@ -19,7 +19,12 @@ const UserRoute: RouteItemType[] = [
     next: findCount,
   },
   {
-    path: `${rootPath}`,
+    path: `${rootPath}/profile`,
+    method: "get",
+    next: findProfile,
+  },
+  {
+    path: rootPath,
     method: "get",
     next: find,
   },
@@ -29,12 +34,7 @@ const UserRoute: RouteItemType[] = [
     next: findOne,
   },
   {
-    path: `${rootPath}/profile`,
-    method: "get",
-    next: findProfile,
-  },
-  {
-    path: `${rootPath}`,
+    path: rootPath,
     method: "post",
     next: create,
     isValidate: true,

@@ -1,19 +1,15 @@
 import { RouteItemType } from "@/lib/routes/items";
 import * as Auth from "@/models/Auth/controller";
 
+const rootPath = "/auth";
 const AuthRoute: RouteItemType[] = [
   {
-    path: "/signInUser",
+    path: `${rootPath}/signIn`,
     method: "post",
-    next: Auth.signInUser,
+    next: Auth.signIn,
   },
   {
-    path: "/signInAdmin",
-    method: "post",
-    next: Auth.signInAdmin,
-  },
-  {
-    path: "/signOut",
+    path: `${rootPath}/signOut`,
     method: "post",
     next: Auth.signOut,
   },

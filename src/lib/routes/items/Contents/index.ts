@@ -17,7 +17,7 @@ const ContentsRoute: RouteItemType[] = [
     next: findCount,
   },
   {
-    path: `${rootPath}`,
+    path: rootPath,
     method: "get",
     next: find,
   },
@@ -27,7 +27,7 @@ const ContentsRoute: RouteItemType[] = [
     next: findOne,
   },
   {
-    path: `${rootPath}`,
+    path: rootPath,
     method: "post",
     next: create,
     isValidate: true,
