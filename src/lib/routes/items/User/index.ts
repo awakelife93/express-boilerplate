@@ -3,6 +3,7 @@ import {
   create,
   find,
   findCount,
+  findOne,
   findProfile,
   remove,
   tokenRemove,
@@ -10,41 +11,47 @@ import {
 } from "@/models/User/controller";
 import { User } from "@/models/User/entity";
 
+const rootPath = "/users";
 const UserRoute: RouteItemType[] = [
   {
-    path: "/findUser",
-    method: "get",
-    next: find,
-  },
-  {
-    path: "/findUserCount",
+    path: `${rootPath}/count`,
     method: "get",
     next: findCount,
   },
   {
-    path: "/findUserProfile",
+    path: `${rootPath}`,
+    method: "get",
+    next: find,
+  },
+  {
+    path: `${rootPath}/:userId`,
+    method: "get",
+    next: findOne,
+  },
+  {
+    path: `${rootPath}/profile`,
     method: "get",
     next: findProfile,
   },
   {
-    path: "/createUser",
+    path: `${rootPath}`,
     method: "post",
     next: create,
     isValidate: true,
     entity: User,
   },
   {
-    path: "/updateUser",
+    path: `${rootPath}/:userId`,
     method: "patch",
     next: update,
   },
   {
-    path: "/removeUser",
+    path: `${rootPath}/:userId`,
     method: "delete",
     next: remove,
   },
   {
-    path: "/tokenRemoveUser",
+    path: `${rootPath}/tokenRemove`,
     method: "delete",
     next: tokenRemove,
   },

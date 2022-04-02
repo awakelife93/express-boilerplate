@@ -3,36 +3,43 @@ import {
   create,
   find,
   findCount,
+  findOne,
   remove,
   update,
 } from "@/models/Contents/controller";
 import { Contents } from "@/models/Contents/entity";
 
+const rootPath = "/contents";
 const ContentsRoute: RouteItemType[] = [
   {
-    path: "/findContentsCount",
+    path: `${rootPath}/count`,
     method: "get",
     next: findCount,
   },
   {
-    path: "/findContents",
+    path: `${rootPath}`,
     method: "get",
     next: find,
   },
   {
-    path: "/createContents",
+    path: `${rootPath}/:contentId`,
+    method: "get",
+    next: findOne,
+  },
+  {
+    path: `${rootPath}`,
     method: "post",
     next: create,
     isValidate: true,
     entity: Contents,
   },
   {
-    path: "/updateContents",
+    path: `${rootPath}/:contentId`,
     method: "patch",
     next: update,
   },
   {
-    path: "/removeContents",
+    path: `${rootPath}/:contentId`,
     method: "delete",
     next: remove,
   },

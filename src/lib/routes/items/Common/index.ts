@@ -8,7 +8,7 @@ const CommonRoute: RouteItemType[] = [
     next: Common.health,
   },
   {
-    path: "/findDashboardCount",
+    path: "/dashboardCount",
     method: "get",
     next: Common.findDashboardCount,
   },
