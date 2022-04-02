@@ -22,13 +22,13 @@ const createItem = async (request: IRequest): Promise<void> => {
   switch (request.method) {
     case "GET":
     case "DELETE":
-      const query: UnknownObject = { ...request.query };
+      const query: UnknownObject = { ...request.query, ...request.params };
       request.item = query;
       break;
     case "POST":
     case "PUT":
     case "PATCH":
-      const body: UnknownObject = { ...request.body };
+      const body: UnknownObject = { ...request.body, ...request.params };
       request.item = body;
       break;
   }
