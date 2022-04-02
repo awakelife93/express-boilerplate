@@ -1,3 +1,5 @@
+import { UserRole } from "../User/type";
+
 export type AuthResponseType = {
   userId: number;
   name: string;
@@ -6,6 +8,7 @@ export type AuthResponseType = {
 };
 
 export type AuthRequestType = {
+  role: UserRole;
   email: string;
   password: string;
 };
