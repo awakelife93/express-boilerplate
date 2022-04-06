@@ -20,12 +20,6 @@ https://github.com/awakelife93/spring-boot-gateway
 
 https://github.com/awakelife93/node-design-template
 
-## 프로젝트 리팩토링
-
-### Old Version = passport.js + redis + express template
-
-### New Version = Api Server
-
 ## [노트]
 
 ### 설명
