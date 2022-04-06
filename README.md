@@ -29,9 +29,9 @@ https://github.com/awakelife93/node-design-template
 .env를 사용한다.
 
 1. generate ./env file (dotenv)
-2. DB Table (Model) 추가 시
+2. DB Table (Model) 관리
     2-1. go .src/lib/database.ts
-    2-2. connectRepository function에 참조되는 AppRepository 객체에 선언
+    2-2. AppRepository 제어
 ```
 
 ## 작성자
