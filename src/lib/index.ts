@@ -2,7 +2,7 @@ import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./ajax";
 import { connectMysql, connectRepository } from "./database/mysql";
 import AppRepository from "./database/mysql/repository";
 import Redis from "./database/redis";
-import { createExpress } from "./express";
+import { createDevelopmentExpress, createProductionExpress } from "./express";
 import { getErrorItems, onFailureHandler } from "./function";
 import {
   checkToken,
@@ -22,7 +22,8 @@ import { UnknownObject } from "./type";
 
 export {
   initializeSentry,
-  createExpress,
+  createDevelopmentExpress,
+  createProductionExpress,
   createServer,
   createRoute,
   onFailureHandler,

@@ -1,11 +1,14 @@
-import { AppRepository } from "@/lib";
+import {
+  AppRepository,
+  createDevelopmentExpress,
+  createProductionExpress,
+} from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
 import config from "./config";
 import {
   connectMysql,
   connectRepository,
-  createExpress,
   createRoute,
   createServer,
   initializeSentry,
@@ -13,21 +16,19 @@ import {
 import redis from "./lib/database/redis";
 
 class App {
-  private readonly server: Application = createExpress();
-
-  private onInitializeSentry(): void {
+  private onInitializeSentry(server: Application): void {
     console.log("App Initialize Sentry");
-    initializeSentry(this.server);
+    initializeSentry(server);
   }
 
-  private onCreateRoute(): void {
+  private onCreateRoute(server: Application): void {
     console.log("App Created Route");
-    createRoute(this.server);
+    createRoute(server);
   }
 
-  private onCreateServer(): void {
+  private onCreateServer(server: Application): void {
     console.log("App Created Server");
-    createServer(this.server);
+    createServer(server);
   }
 
   private async onConnectDB(): Promise<void> {
@@ -47,8 +48,10 @@ class App {
   }
 
   private onCreateLocalHostApp = async (): Promise<void> => {
-    this.onCreateRoute();
-    this.onCreateServer();
+    const server: Application = createDevelopmentExpress();
+
+    this.onCreateRoute(server);
+    this.onCreateServer(server);
     await this.onConnectDB();
     await this.onConnectRepository();
     await this.onCreateTestSample();
@@ -58,9 +61,11 @@ class App {
   private onCreateDevelopmentApp = this.onCreateLocalHostApp;
 
   private onCreateProductionApp = async (): Promise<void> => {
-    this.onInitializeSentry();
-    this.onCreateRoute();
-    this.onCreateServer();
+    const server: Application = createProductionExpress();
+
+    this.onInitializeSentry(server);
+    this.onCreateRoute(server);
+    this.onCreateServer(server);
     await this.onConnectDB();
     await this.onConnectRepository();
   };
