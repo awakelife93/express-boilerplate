@@ -47,8 +47,8 @@ const validateBodyItem = async (
   entity: ClassConstructor<object>,
   item: UnknownObject
 ): Promise<void> => {
-  const target: object = plainToClass(entity, item);
   try {
+    const target: object = plainToClass(entity, item);
     await validateOrReject(target);
   } catch (error: unknown) {
     console.log(`validateBodyItem Error ${error}`);
