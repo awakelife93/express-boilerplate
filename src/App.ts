@@ -14,6 +14,7 @@ import {
   initializeSentry
 } from "./lib";
 import redis from "./lib/database/redis";
+import { generateConfigLog } from "./utils";
 
 class App {
   private onInitializeSentry(server: Application): void {
@@ -80,10 +81,9 @@ class App {
     const application = applications[config.NODE_ENV];
 
     if (_.isFunction(application)) {
-      console.log(`NODE_ENV =======> ${config.NODE_ENV} Start`);
       return application;
     } else {
-      console.log(`NODE_ENV is Undefined!!! So, LocalHost Mode Start`);
+      console.log(`NODE_ENV is Undefined!!! start localhost mode`);
       config.NODE_ENV = "localhost";
       return this.onCreateLocalHostApp;
     }
@@ -91,6 +91,10 @@ class App {
 
   startApplication = async (): Promise<void> => {
     try {
+      console.log('==================================');
+      generateConfigLog();
+      console.log('==================================');
+      
       const application = this.getApplication();
       await application();
     } catch (error: unknown) {
