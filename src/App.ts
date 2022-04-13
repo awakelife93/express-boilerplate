@@ -1,7 +1,7 @@
 import {
   AppRepository,
   createDevelopmentExpress,
-  createProductionExpress,
+  createProductionExpress
 } from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
@@ -11,7 +11,7 @@ import {
   connectRepository,
   createRoute,
   createServer,
-  initializeSentry,
+  initializeSentry
 } from "./lib";
 import redis from "./lib/database/redis";
 
@@ -89,7 +89,7 @@ class App {
     }
   };
 
-  public startApplication = async (): Promise<void> => {
+  startApplication = async (): Promise<void> => {
     try {
       const application = this.getApplication();
       await application();
