@@ -50,8 +50,8 @@ export const isUser = (role: UserRole): boolean => role === UserRole.USER;
 
 export const isAdmin = (role: UserRole): boolean => role === UserRole.ADMIN;
 
-export const generateConfigLog = () => {
-  return Object.keys(config).forEach((key) => {
+export const generateConfigLog = (): void => {
+  Object.keys(config).forEach((key) => {
     console.log(`${key}: ${config[key as keyof ConfigType]}`);
   })
-}
+};
