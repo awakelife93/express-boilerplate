@@ -91,10 +91,7 @@ class App {
 
   startApplication = async (): Promise<void> => {
     try {
-      console.log('==================================');
       generateConfigLog();
-      console.log('==================================');
-      
       const application = this.getApplication();
       await application();
     } catch (error: unknown) {
