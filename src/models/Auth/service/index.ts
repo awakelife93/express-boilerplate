@@ -1,3 +1,4 @@
+import config from "@/config";
 import {
   CommonStatusCode,
   CommonStatusMessage,
@@ -50,7 +51,7 @@ export const _signIn = async (
   const refreshToken = createToken({
     userId: user.userId,
     email: user.email,
-    jwtExpired: "3h",
+    jwtExpired: config.jwtRefreshExpired,
   });
 
   // refreshToken 레디스 추가
