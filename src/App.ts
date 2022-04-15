@@ -1,7 +1,7 @@
 import {
   AppRepository,
   createDevelopmentExpress,
-  createProductionExpress,
+  createProductionExpress
 } from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
@@ -11,9 +11,10 @@ import {
   connectRepository,
   createRoute,
   createServer,
-  initializeSentry,
+  initializeSentry
 } from "./lib";
 import redis from "./lib/database/redis";
+import { generateConfigLog } from "./utils";
 
 class App {
   private onInitializeSentry(server: Application): void {
@@ -80,17 +81,17 @@ class App {
     const application = applications[config.NODE_ENV];
 
     if (_.isFunction(application)) {
-      console.log(`NODE_ENV =======> ${config.NODE_ENV} Start`);
       return application;
     } else {
-      console.log(`NODE_ENV is Undefined!!! So, LocalHost Mode Start`);
+      console.log(`NODE_ENV is Undefined!!! start localhost mode`);
       config.NODE_ENV = "localhost";
       return this.onCreateLocalHostApp;
     }
   };
 
-  public startApplication = async (): Promise<void> => {
+  startApplication = async (): Promise<void> => {
     try {
+      generateConfigLog();
       const application = this.getApplication();
       await application();
     } catch (error: unknown) {

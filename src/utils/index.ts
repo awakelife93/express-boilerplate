@@ -1,3 +1,5 @@
+import config from "@/config";
+import { ConfigType } from "@/lib/type";
 import { UserRole } from "@/models/User/type";
 import * as bcrypt from "bcrypt";
 import * as _ from "lodash";
@@ -47,3 +49,22 @@ export const healthCheckMemory = (): boolean => {
 export const isUser = (role: UserRole): boolean => role === UserRole.USER;
 
 export const isAdmin = (role: UserRole): boolean => role === UserRole.ADMIN;
+
+export const generateConfigLog = (): void => {
+  console.log('==================================');
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log(`* start time: ${new Date().getTime()}`);
+  Object.keys(config).forEach((key) => {
+    console.log(`* ${key}: ${config[key as keyof ConfigType]}`);
+  });
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log('*');
+  console.log('==================================');
+};
