@@ -11,17 +11,6 @@ import {
 } from "../service";
 import { ContentsRequestType } from "../type";
 
-/**
- * @description
- * 대표 CRUD를 통해 중복되는 객체 호출을 방지한다.
- */
-
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<number>}
- */
 export const findCount = async (
   request: IRequest,
   response: IResponse
@@ -30,12 +19,6 @@ export const findCount = async (
   return await findContentsCount(conditions);
 };
 
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<Contents>}
- */
 export const findOne = async (
   request: IRequest,
   response: IResponse
@@ -44,12 +27,6 @@ export const findOne = async (
   return await findOneContents(conditions);
 };
 
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<[Contents[], number]>}
- */
 export const find = async (
   request: IRequest,
   response: IResponse
@@ -58,12 +35,6 @@ export const find = async (
   return await findContents(conditions);
 };
 
-/**
- * @method POST
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<Contents>}
- */
 export const create = async (
   request: IRequest,
   response: IResponse
@@ -72,12 +43,6 @@ export const create = async (
   return await createContents(conditions);
 };
 
-/**
- * @method PATCH
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<Contents>}
- */
 export const update = async (
   request: IRequest,
   response: IResponse
@@ -86,12 +51,6 @@ export const update = async (
   return await updateContents(conditions);
 };
 
-/**
- * @method DELETE
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<object>}
- */
 export const remove = async (
   request: IRequest,
   response: IResponse

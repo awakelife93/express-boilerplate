@@ -3,12 +3,6 @@ import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { _signIn, _signOut } from "@/models/Auth/service";
 import { AuthRequestType, AuthResponseType } from "../type";
 
-/**
- * @method POST
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<AuthResponseType>}
- */
 export const signIn = async (
   request: IRequest,
   response: IResponse
@@ -17,12 +11,6 @@ export const signIn = async (
   return await _signIn(conditions);
 };
 
-/**
- * @method POST
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<object>}
- */
 export const signOut = async (
   request: IRequest,
   response: IResponse

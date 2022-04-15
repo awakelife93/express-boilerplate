@@ -13,17 +13,6 @@ import {
 } from "../service";
 import { UserProfileType, UserRequestType } from "../type";
 
-/**
- * @description
- * 대표 CRUD를 통해 중복되는 객체 호출을 방지한다.
- */
-
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<User>}
- */
 export const findOne = async (
   request: IRequest,
   response: IResponse
@@ -32,12 +21,6 @@ export const findOne = async (
   return await findOneUser(conditions);
 };
 
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<[User[], number]>}
- */
 export const find = async (
   request: IRequest,
   response: IResponse
@@ -46,12 +29,6 @@ export const find = async (
   return await findUser(conditions);
 };
 
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<number>}
- */
 export const findCount = async (
   request: IRequest,
   response: IResponse
@@ -60,12 +37,6 @@ export const findCount = async (
   return await findUserCount(conditions);
 };
 
-/**
- * @method GET
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<UserProfileType>}
- */
 export const findProfile = async (
   request: IRequest,
   response: IResponse
@@ -74,12 +45,6 @@ export const findProfile = async (
   return await findUserProfile(token);
 };
 
-/**
- * @method POST
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<User>}
- */
 export const create = async (
   request: IRequest,
   response: IResponse
@@ -88,12 +53,6 @@ export const create = async (
   return await createUser(conditions);
 };
 
-/**
- * @method PATCH
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<User>}
- */
 export const update = async (
   request: IRequest,
   response: IResponse
@@ -102,12 +61,6 @@ export const update = async (
   return await updateUser(conditions);
 };
 
-/**
- * @method DELETE
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<object>}
- */
 export const remove = async (
   request: IRequest,
   response: IResponse
@@ -116,12 +69,6 @@ export const remove = async (
   return await removeUser(conditions);
 };
 
-/**
- * @method DELETE
- * @param {IRequest} request
- * @param {IResponse} response
- * @returns {CommonPromiseAPIResponseType<object>}
- */
 export const tokenRemove = async (
   request: IRequest,
   response: IResponse
