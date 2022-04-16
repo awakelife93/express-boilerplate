@@ -14,16 +14,16 @@ import { UserRole } from "../type";
 
 @Entity("user")
 export class User extends CommonEntity {
-  @PrimaryGeneratedColumn({ name: "id" })
+  @PrimaryGeneratedColumn({ name: "id", comment: "고유키" })
   userId!: number;
 
   @IsEmail()
-  @Column({ length: 50, unique: true })
+  @Column({ length: 50, unique: true, comment: "이메일" })
   email!: string;
 
   @Length(1, 10)
   @IsString()
-  @Column({ length: 10 })
+  @Column({ length: 10, comment: "이름" })
   name!: string;
 
   @Length(3, 20)
@@ -31,6 +31,7 @@ export class User extends CommonEntity {
   @Column({
     length: 200,
     select: false,
+    comment: "별명",
     transformer: {
       to: (str: string) => hashSync(str),
       from: (str: string) => str,
@@ -42,13 +43,14 @@ export class User extends CommonEntity {
   @Column({
     type: "enum",
     enum: UserRole,
+    comment: "권한",
     default: UserRole.USER,
   })
   role!: UserRole;
 
   @IsOptional()
   @IsBoolean()
-  @Column({ name: "is_deleted", default: false })
+  @Column({ name: "is_deleted", default: false, comment: "삭제 여부" })
   isDeleted!: boolean;
 
   async findPassword(userId: number): Promise<string> {
