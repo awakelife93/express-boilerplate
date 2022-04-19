@@ -51,20 +51,29 @@ export const isUser = (role: UserRole): boolean => role === UserRole.USER;
 export const isAdmin = (role: UserRole): boolean => role === UserRole.ADMIN;
 
 export const generateConfigLog = (): void => {
-  console.log('==================================');
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log(`* start time: ${new Date().getTime()}`);
+  console.log("==================================");
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log(
+    `* start time: ${new Date().toLocaleDateString(config.timezone, {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    })}`
+  );
   Object.keys(config).forEach((key) => {
     console.log(`* ${key}: ${config[key as keyof ConfigType]}`);
   });
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log('*');
-  console.log('==================================');
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log("*");
+  console.log("==================================");
 };

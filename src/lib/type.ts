@@ -20,4 +20,5 @@ export type ConfigType = {
   jwtExpired: string | number;
   jwtRefreshExpired: string | number;
   origin: string;
+  timezone: string;
 };
