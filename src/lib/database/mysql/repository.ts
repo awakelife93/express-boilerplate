@@ -12,40 +12,53 @@ class AppRepository {
 
   async generateTestData(): Promise<void> {
     const generateContentsTable = () => {
-      sampleContents.forEach((item: Partial<Contents>, index: number) => {
-        const contents = new Contents();
-        const title = item.title ?? "제목";
-        const subTitle = item.subTitle ?? "부제목";
-        const imageLink = item.imageLink ?? "/assets/images/free_image1.png";
-        const desc =
-          item.description ??
-          "설명설명설명설명설명설명설명설명설명설명설명설명";
+      sampleContents.forEach(
+        (
+          item: Omit<
+            Contents,
+            "contentId" | "isDeleted" | "createdDt" | "updatedDt"
+          >,
+          index: number
+        ) => {
+          const contents = new Contents();
 
-        contents.imageLink = imageLink;
-        contents.title = title + index;
-        contents.subTitle = subTitle + index;
-        contents.description = desc + index;
+          contents.title = item.title + index;
+          contents.subTitle = item.subTitle + index;
+          contents.imageLink = item.imageLink;
+          contents.description = item.description + index;
 
-        this.contents.save(contents);
-      });
+          this.contents.save(contents);
+        }
+      );
     };
 
     const generateUserTable = () => {
-      sampleUsers.forEach((item: Partial<User>, index: number) => {
-        const user = new User();
-        const email = item.email ?? "awakelife93@gmail.com";
-        const nickname = item.name ?? "Harry";
+      sampleUsers.forEach(
+        (
+          item: Omit<
+            User,
+            | "userId"
+            | "role"
+            | "isDeleted"
+            | "createdDt"
+            | "updatedDt"
+            | "findPassword"
+          >,
+          index: number
+        ) => {
+          const user = new User();
 
-        user.email = email + index;
-        user.password = item.password ?? "123";
-        user.name = nickname + index;
+          user.email = item.email + index;
+          user.password = item.password ?? "123";
+          user.name = item.name + index;
 
-        if (index === 0) {
-          user.role = UserRole.ADMIN;
+          if (index === 0) {
+            user.role = UserRole.ADMIN;
+          }
+
+          this.user.save(user);
         }
-
-        this.user.save(user);
-      });
+      );
     };
 
     await generateContentsTable();

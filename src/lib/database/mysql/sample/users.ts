@@ -1,6 +1,9 @@
 import { User } from "@/models/User/entity";
 
-export const sampleUsers: Partial<User>[] = [
+export const sampleUsers: Omit<
+  User,
+  "userId" | "role" | "isDeleted" | "createdDt" | "updatedDt" | "findPassword"
+>[] = [
   {
     email: "awakelife93@gmail.com",
     password: "123",
