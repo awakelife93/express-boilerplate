@@ -8,11 +8,11 @@ import {
   checkToken,
   createToken,
   getPayload,
+  getTokenPayload,
   initializeMiddleWare,
   IRequest,
   IResponse,
-  payloadToken,
-  PayloadTokenType,
+  TokenPayLoadType,
 } from "./middleware";
 import createRoute from "./routes";
 import { initializeSentry } from "./sentry";
@@ -37,8 +37,8 @@ export {
   initializeMiddleWare,
   IRequest,
   IResponse,
-  payloadToken,
-  PayloadTokenType,
+  getTokenPayload,
+  TokenPayLoadType,
   createToken,
   checkToken,
   getPayload,

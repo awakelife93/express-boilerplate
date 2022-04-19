@@ -10,18 +10,18 @@ import { generateRefreshTokenKey } from "@/utils";
 import * as jwt from "jsonwebtoken";
 import * as _ from "lodash";
 
-export type PayloadItemType = {
+export type PayLoadItemType = {
   userId: number;
   email: string;
 };
 
 export type CreateTokenParamsType = {
   jwtExpired?: string | number;
-} & PayloadItemType;
+} & PayLoadItemType;
 
-export type PayloadTokenType = {
+export type TokenPayLoadType = {
   exp: number;
-} & PayloadItemType;
+} & PayLoadItemType;
 
 /**
  * @description
@@ -43,14 +43,14 @@ export const createToken = ({
   );
 };
 
-export const payloadToken = (token: string): PayloadTokenType => {
-  let payload = {} as PayloadTokenType;
+export const getTokenPayload = (token: string): TokenPayLoadType => {
+  let payload = {} as TokenPayLoadType;
 
   if (!_.isEmpty(token)) {
     payload = {
       ...(jwt.verify(token, config.jwtSecret, {
         ignoreExpiration: true,
-      }) as PayloadTokenType),
+      }) as TokenPayLoadType),
     };
   }
 
@@ -66,7 +66,7 @@ export const checkToken = async (request: IRequest): Promise<void> => {
      */
     try {
       const now = new Date().getTime() / 1000;
-      const jwtPayload: PayloadTokenType = payloadToken(token);
+      const jwtPayload: TokenPayLoadType = getTokenPayload(token);
 
       // 토큰이 유효하지 않다.
       if (now > jwtPayload.exp) {
@@ -84,8 +84,8 @@ export const checkToken = async (request: IRequest): Promise<void> => {
           });
         }
 
-        const refreshTokenPayload: PayloadTokenType =
-          payloadToken(refreshToken);
+        const refreshTokenPayload: TokenPayLoadType =
+          getTokenPayload(refreshToken);
         if (now > refreshTokenPayload.exp) {
           console.log(`===========> 2. ${now} > refreshToken exp ${token}`);
 
@@ -117,8 +117,8 @@ export const checkToken = async (request: IRequest): Promise<void> => {
   }
 };
 
-export const getPayload = (token: string): PayloadItemType => {
-  const payload: PayloadTokenType = payloadToken(token);
+export const getPayload = (token: string): PayLoadItemType => {
+  const payload: TokenPayLoadType = getTokenPayload(token);
 
   if (_.isEmpty(payload)) {
     onFailureHandler({

@@ -5,7 +5,7 @@ import {
   getPayload,
   onFailureHandler,
 } from "@/lib";
-import { PayloadItemType } from "@/lib/middleware/jwt";
+import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { _signOut } from "@/models/Auth/service";
 import { QueryType } from "@/models/Common/type";
@@ -127,7 +127,7 @@ export const removeUser = async (
 export const tokenRemoveUser = async (
   token: string
 ): CommonPromiseAPIResponseType<object> => {
-  const payload: PayloadItemType = await getPayload(token);
+  const payload: PayLoadItemType = await getPayload(token);
   await removeUser({ userId: payload.userId });
   return await _signOut(token);
 };
@@ -135,7 +135,7 @@ export const tokenRemoveUser = async (
 export const findUserProfile = async (
   token: string
 ): CommonPromiseAPIResponseType<UserProfileType> => {
-  const payload: PayloadItemType = await getPayload(token);
+  const payload: PayLoadItemType = await getPayload(token);
   const user = (await findOneUser({ email: payload.email })) as User;
 
   if (_.isUndefined(user)) {

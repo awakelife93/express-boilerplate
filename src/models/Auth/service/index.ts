@@ -7,7 +7,7 @@ import {
   onFailureHandler,
   Redis,
 } from "@/lib";
-import { PayloadItemType } from "@/lib/middleware/jwt";
+import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { User } from "@/models/User/entity";
 import { findOneUser } from "@/models/User/service";
@@ -71,7 +71,7 @@ export const _signIn = async (
 export const _signOut = async (
   token: string
 ): CommonPromiseAPIResponseType<object> => {
-  const payload: PayloadItemType = await getPayload(token);
+  const payload: PayLoadItemType = await getPayload(token);
 
   if (_.isEmpty(payload.email)) {
     onFailureHandler({

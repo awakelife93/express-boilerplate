@@ -6,8 +6,8 @@ import {
   checkToken,
   createToken,
   getPayload,
-  payloadToken,
-  PayloadTokenType,
+  getTokenPayload,
+  TokenPayLoadType,
 } from "./jwt";
 import generateRequest, { validateBody } from "./request";
 import generateResponse from "./response";
@@ -76,8 +76,8 @@ export {
   IResponse,
   initializeMiddleWare,
   checkToken,
-  payloadToken,
+  getTokenPayload,
   createToken,
   getPayload,
-  PayloadTokenType,
+  TokenPayLoadType,
 };
