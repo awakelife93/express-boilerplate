@@ -12,7 +12,7 @@ class AppRepository {
   private contents!: Repository<Contents>;
 
   async generateTestData(): Promise<void> {
-    const generateContentsTable = () => {
+    const generateContentsTable = (): void => {
       sampleContents.forEach(
         (
           item: ContentParamsType,
@@ -30,7 +30,7 @@ class AppRepository {
       );
     };
 
-    const generateUserTable = () => {
+    const generateUserTable = (): void => {
       sampleUsers.forEach(
         (
           item: UserParamsType,
