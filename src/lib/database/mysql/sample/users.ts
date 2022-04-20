@@ -1,9 +1,6 @@
-import { User } from "@/models/User/entity";
+import { UserParamsType } from "@/models/User/type";
 
-export const sampleUsers: Omit<
-  User,
-  "userId" | "role" | "isDeleted" | "createdDt" | "updatedDt" | "findPassword"
->[] = [
+export const sampleUsers: UserParamsType[] = [
   {
     email: "awakelife93@gmail.com",
     password: "123",

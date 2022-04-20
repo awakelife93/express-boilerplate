@@ -1,9 +1,6 @@
-import { Contents } from "@/models/Contents/entity";
+import { ContentParamsType } from "@/models/Contents/type";
 
-export const sampleContents: Omit<
-  Contents,
-  "contentId" | "isDeleted" | "createdDt" | "updatedDt"
->[] = [
+export const sampleContents: ContentParamsType[] = [
   {
     imageLink: "/assets/images/free_image1.png",
     title: "제목",

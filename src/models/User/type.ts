@@ -10,6 +10,8 @@ export type UserRequestType = UserRequestSubOptionType &
   CommonRequestType &
   User;
 
+export type UserParamsType = Omit<User, "userId" | "role" | "isDeleted" | "createdDt" | "updatedDt" | "findPassword">;
+
 export type UserProfileType = {
   userId: number;
   email: string;

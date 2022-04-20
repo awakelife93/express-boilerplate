@@ -1,7 +1,8 @@
 import config from "@/config";
 import { Contents } from "@/models/Contents/entity";
+import { ContentParamsType } from "@/models/Contents/type";
 import { User } from "@/models/User/entity";
-import { UserRole } from "@/models/User/type";
+import { UserParamsType, UserRole } from "@/models/User/type";
 import { getManager, Repository } from "typeorm";
 import { sampleContents } from "./sample/contents";
 import { sampleUsers } from "./sample/users";
@@ -14,10 +15,7 @@ class AppRepository {
     const generateContentsTable = () => {
       sampleContents.forEach(
         (
-          item: Omit<
-            Contents,
-            "contentId" | "isDeleted" | "createdDt" | "updatedDt"
-          >,
+          item: ContentParamsType,
           index: number
         ) => {
           const contents = new Contents();
@@ -35,15 +33,7 @@ class AppRepository {
     const generateUserTable = () => {
       sampleUsers.forEach(
         (
-          item: Omit<
-            User,
-            | "userId"
-            | "role"
-            | "isDeleted"
-            | "createdDt"
-            | "updatedDt"
-            | "findPassword"
-          >,
+          item: UserParamsType,
           index: number
         ) => {
           const user = new User();
