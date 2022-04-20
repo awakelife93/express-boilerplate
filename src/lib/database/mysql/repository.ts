@@ -22,8 +22,8 @@ class AppRepository {
 
           contents.title = item.title + index;
           contents.subTitle = item.subTitle + index;
-          contents.imageLink = item.imageLink;
           contents.description = item.description + index;
+          contents.imageLink = item.imageLink;
 
           this.contents.save(contents);
         }
@@ -39,8 +39,8 @@ class AppRepository {
           const user = new User();
 
           user.email = item.email + index;
-          user.password = item.password ?? "123";
           user.name = item.name + index;
+          user.password = item.password ?? "123";
 
           if (index === 0) {
             user.role = UserRole.ADMIN;
