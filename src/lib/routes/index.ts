@@ -1,9 +1,9 @@
 import {
   CommonStatusCode,
-  getErrorItems,
+  getErrorItem,
   initializeMiddleWare,
   IRequest,
-  IResponse,
+  IResponse
 } from "@/lib";
 import { Application, NextFunction } from "express";
 import * as _ from "lodash";
@@ -35,7 +35,7 @@ export default (app: Application): void => {
             });
           }
         } catch (error: unknown) {
-          const _error = getErrorItems(error);
+          const _error = getErrorItem(error);
           console.log(`ERROR_${_.toUpper(item.method)}_${item.path}`);
           console.log(_error);
           response.status(_error.status);

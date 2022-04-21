@@ -1,13 +1,13 @@
 import config from "@/config";
 import { NextFunction, Request, Response } from "express";
-import { getErrorItems } from "..";
+import { getErrorItem } from "..";
 import { RouteItemType } from "../routes/items";
 import {
   checkToken,
   createToken,
   getPayload,
   getTokenPayload,
-  TokenPayLoadType,
+  TokenPayLoadType
 } from "./jwt";
 import generateRequest, { validateBody } from "./request";
 import generateResponse from "./response";
@@ -43,7 +43,7 @@ const initializeMiddleWare = async (
 
     next();
   } catch (error: unknown) {
-    const _error = getErrorItems(error);
+    const _error = getErrorItem(error);
 
     response.status(_error.status);
     response.send(_error);

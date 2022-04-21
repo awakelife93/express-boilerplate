@@ -18,14 +18,14 @@ export const onFailureHandler = ({
   };
 };
 
-export const getErrorItems = (error: unknown): HandlerParamsType => {
-  const item = {} as HandlerParamsType;
+export const getErrorItem = (error: unknown): HandlerParamsType => {
+  const item = {
+    status: CommonStatusCode.INTERNAL_SERVER_ERROR
+  } as HandlerParamsType;
 
   if (typeof error === "string") {
-    item.status = 500;
     item.message = error;
   } else if (error instanceof Error) {
-    item.status = 500;
     item.message = error.message;
   } else {
     const _error = error as HandlerParamsType;
