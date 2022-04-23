@@ -10,4 +10,7 @@ export type ContentsRequestType = ContentsRequestSubOptionType &
   CommonRequestType &
   Contents;
 
-export type ContentParamsType = Omit<Contents, "contentId" | "isDeleted" | "createdDt" | "updatedDt">;
+export type ContentParamsType = Omit<
+  Contents,
+  "contentId" | "isDeleted" | "createdDt" | "updatedDt"
+>;

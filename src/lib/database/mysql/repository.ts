@@ -13,42 +13,32 @@ class AppRepository {
 
   async generateTestData(): Promise<void> {
     const generateContentsTable = (): void => {
-      sampleContents.forEach(
-        (
-          item: ContentParamsType,
-          index: number
-        ) => {
-          const contents = new Contents();
+      sampleContents.forEach((item: ContentParamsType, index: number) => {
+        const contents = new Contents();
 
-          contents.title = item.title + index;
-          contents.subTitle = item.subTitle + index;
-          contents.description = item.description + index;
-          contents.imageLink = item.imageLink;
+        contents.title = item.title + index;
+        contents.subTitle = item.subTitle + index;
+        contents.description = item.description + index;
+        contents.imageLink = item.imageLink;
 
-          this.contents.save(contents);
-        }
-      );
+        this.contents.save(contents);
+      });
     };
 
     const generateUserTable = (): void => {
-      sampleUsers.forEach(
-        (
-          item: UserParamsType,
-          index: number
-        ) => {
-          const user = new User();
+      sampleUsers.forEach((item: UserParamsType, index: number) => {
+        const user = new User();
 
-          user.email = item.email + index;
-          user.name = item.name + index;
-          user.password = item.password ?? "123";
+        user.email = item.email + index;
+        user.name = item.name + index;
+        user.password = item.password ?? "123";
 
-          if (index === 0) {
-            user.role = UserRole.ADMIN;
-          }
-
-          this.user.save(user);
+        if (index === 0) {
+          user.role = UserRole.ADMIN;
         }
-      );
+
+        this.user.save(user);
+      });
     };
 
     await generateContentsTable();

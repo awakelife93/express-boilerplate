@@ -20,7 +20,7 @@ export const onFailureHandler = ({
 
 export const getErrorItem = (error: unknown): HandlerParamsType => {
   const item = {
-    status: CommonStatusCode.INTERNAL_SERVER_ERROR
+    status: CommonStatusCode.INTERNAL_SERVER_ERROR,
   } as HandlerParamsType;
 
   if (typeof error === "string") {

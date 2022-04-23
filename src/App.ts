@@ -1,7 +1,7 @@
 import {
   AppRepository,
   createDevelopmentExpress,
-  createProductionExpress
+  createProductionExpress,
 } from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
@@ -11,7 +11,7 @@ import {
   connectRepository,
   createRoute,
   createServer,
-  initializeSentry
+  initializeSentry,
 } from "./lib";
 import redis from "./lib/database/redis";
 import { generateConfigLog } from "./utils";
