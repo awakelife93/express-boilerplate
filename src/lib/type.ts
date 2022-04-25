@@ -14,6 +14,7 @@ export type ConfigType = {
   redisHost: string;
   mysqlPort: string | number;
   mysqlHost: string;
+  mysqlUserName: string;
   mysqlDataBase: string;
   mysqlPassword: string;
   jwtSecret: string;

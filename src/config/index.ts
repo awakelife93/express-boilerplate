@@ -15,6 +15,7 @@ const config: ConfigType = {
   redisPort: process.env.redisPort ?? 6379,
   redisHost: process.env.redisHost ?? "127.0.0.1",
   // mysql
+  mysqlUserName: process.env.mysqlUserName ?? "root",
   mysqlPort: process.env.mysqlPort ?? 3306,
   mysqlHost: process.env.mysqlHost ?? "127.0.0.1",
   mysqlDataBase: process.env.database ?? "localDB",
