@@ -18,7 +18,7 @@ const config: ConfigType = {
   mysqlUserName: process.env.mysqlUserName ?? "root",
   mysqlPort: process.env.mysqlPort ?? 3306,
   mysqlHost: process.env.mysqlHost ?? "127.0.0.1",
-  mysqlDataBase: process.env.database ?? "localDB",
+  mysqlDataBase: process.env.mysqlDataBase ?? "localDB",
   mysqlPassword: process.env.mysqlPassword ?? "",
   // jwt
   jwtSecret: process.env.jwtSecret ?? "secret",
