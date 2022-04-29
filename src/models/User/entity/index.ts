@@ -6,7 +6,7 @@ import {
   IsEnum,
   IsOptional,
   IsString,
-  Length,
+  Length
 } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonEntity } from "../../Common/entity";
@@ -31,7 +31,7 @@ export class User extends CommonEntity {
   @Column({
     length: 200,
     select: false,
-    comment: "별명",
+    comment: "패스워드",
     transformer: {
       to: (str: string) => hashSync(str),
       from: (str: string) => str,

@@ -31,7 +31,7 @@ class AppRepository {
 
         user.email = item.email + index;
         user.name = item.name + index;
-        user.password = item.password ?? "123";
+        user.password = item.password;
 
         if (index === 0) {
           user.role = UserRole.ADMIN;
