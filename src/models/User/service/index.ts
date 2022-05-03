@@ -3,7 +3,7 @@ import {
   CommonStatusCode,
   CommonStatusMessage,
   getPayload,
-  onFailureHandler,
+  onFailureHandler
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
@@ -127,7 +127,7 @@ export const removeUser = async (
 export const tokenRemoveUser = async (
   token: string
 ): CommonPromiseAPIResponseType<object> => {
-  const payload: PayLoadItemType = await getPayload(token);
+  const payload: PayLoadItemType = getPayload(token);
   await removeUser({ userId: payload.userId });
   return await _signOut(token);
 };
@@ -135,18 +135,8 @@ export const tokenRemoveUser = async (
 export const findUserProfile = async (
   token: string
 ): CommonPromiseAPIResponseType<UserProfileType> => {
-  const payload: PayLoadItemType = await getPayload(token);
+  const payload: PayLoadItemType = getPayload(token);
   const user = (await findOneUser({ email: payload.email })) as User;
-
-  if (_.isUndefined(user)) {
-    console.log(
-      `findUserProfile - token missing (item = ${payload} / token = ${token} / user = ${user})`
-    );
-    onFailureHandler({
-      status: CommonStatusCode.NOT_FOUND,
-      message: CommonStatusMessage.NOT_FOUND,
-    });
-  }
 
   return {
     userId: user.userId,

@@ -4,7 +4,7 @@ import {
   CommonStatusMessage,
   IRequest,
   onFailureHandler,
-  Redis,
+  Redis
 } from "@/lib";
 import { generateRefreshTokenKey } from "@/utils";
 import * as jwt from "jsonwebtoken";
@@ -121,9 +121,10 @@ export const getPayload = (token: string): PayLoadItemType => {
   const payload: TokenPayLoadType = getTokenPayload(token);
 
   if (_.isEmpty(payload)) {
+    console.log(`===========> Token Payload Empty ${token}`);
     onFailureHandler({
-      status: CommonStatusCode.FORBIDDEN,
-      message: CommonStatusMessage.FORBIDDEN,
+      status: CommonStatusCode.NOT_FOUND,
+      message: CommonStatusMessage.NOT_FOUND,
     });
   }
 

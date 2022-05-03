@@ -5,7 +5,7 @@ import {
   createToken,
   getPayload,
   onFailureHandler,
-  Redis,
+  Redis
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
@@ -71,16 +71,7 @@ export const _signIn = async (
 export const _signOut = async (
   token: string
 ): CommonPromiseAPIResponseType<object> => {
-  const payload: PayLoadItemType = await getPayload(token);
-
-  if (_.isEmpty(payload.email)) {
-    onFailureHandler({
-      status: CommonStatusCode.NOT_FOUND,
-      message: CommonStatusMessage.NOT_FOUND,
-    });
-  }
-
+  const payload: PayLoadItemType = getPayload(token);
   Redis.remove(generateRefreshTokenKey(payload.email));
-
   return {};
 };
