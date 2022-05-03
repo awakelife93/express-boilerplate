@@ -21,11 +21,6 @@ export type CreateTokenParamsType = {
 
 export type TokenPayLoadType = jwt.JwtPayload & PayLoadItemType;
 
-/**
- * @description
- * @param {CreateTokenParamsType}
- * @returns {string} token
- */
 export const createToken = ({
   userId,
   email,
