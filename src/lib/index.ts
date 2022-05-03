@@ -5,14 +5,13 @@ import Redis from "./database/redis";
 import { createDevelopmentExpress, createProductionExpress } from "./express";
 import { getErrorItem, onFailureHandler } from "./function";
 import {
-    checkToken,
     createToken,
     getPayload,
     getTokenPayload,
     initializeMiddleWare,
     IRequest,
     IResponse,
-    TokenPayLoadType
+    TokenPayLoadType, validateToken
 } from "./middleware";
 import createRoute from "./routes";
 import { initializeSentry } from "./sentry";
@@ -40,7 +39,7 @@ export {
     getTokenPayload,
     TokenPayLoadType,
     createToken,
-    checkToken,
+    validateToken,
     getPayload,
     getAPI,
     deleteAPI,

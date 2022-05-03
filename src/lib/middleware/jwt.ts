@@ -49,7 +49,7 @@ export const getTokenPayload = (token: string): TokenPayLoadType => {
   };
 };
 
-export const checkToken = async (request: IRequest): Promise<void> => {
+export const validateToken = async (request: IRequest): Promise<void> => {
   const token = request.token;
 
   if (!_.isUndefined(token)) {

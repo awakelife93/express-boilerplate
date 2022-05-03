@@ -3,11 +3,10 @@ import { NextFunction, Request, Response } from "express";
 import { getErrorItem } from "..";
 import { RouteItemType } from "../routes/items";
 import {
-  checkToken,
   createToken,
   getPayload,
   getTokenPayload,
-  TokenPayLoadType,
+  TokenPayLoadType, validateToken
 } from "./jwt";
 import generateRequest, { validateBody } from "./request";
 import generateResponse from "./response";
@@ -67,7 +66,7 @@ const initializeAllMiddleWare = async (
 ): Promise<void> => {
   await generateRequest(request);
   await generateResponse(response);
-  await checkToken(request);
+  await validateToken(request);
   await validateBody(request, routeItem);
 };
 
@@ -75,7 +74,7 @@ export {
   IRequest,
   IResponse,
   initializeMiddleWare,
-  checkToken,
+  validateToken,
   getTokenPayload,
   createToken,
   getPayload,
