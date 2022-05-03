@@ -60,34 +60,50 @@ export const validateToken = async (request: IRequest): Promise<void> => {
       const now = new Date().getTime() / 1000;
       const jwtPayload: TokenPayLoadType = getTokenPayload(token);
 
-      // 토큰이 유효하지 않다.
-      if (!_.isUndefined(jwtPayload.exp) && now > jwtPayload.exp) {
+      if (_.isUndefined(jwtPayload.exp)) {
+        console.log(`===========> token exp is undefined`);
+        throw {
+          status: CommonStatusCode.UNAUTHORIZED,
+          message: CommonStatusMessage.UNAUTHORIZED,
+        };
+      }
+      
+      // token expired
+      if (now > jwtPayload.exp) {
         const refreshToken = (await Redis.get(
           generateRefreshTokenKey(jwtPayload.email)
         ));
 
         if (_.isNull(refreshToken)) {
-          console.log(`===========> 1. refreshToken is Null ${token}`);
-          onFailureHandler({
+          console.log(`===========> 1. refreshToken is null ${token}`);
+          throw {
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
-          });
+          };
         }
 
         const refreshTokenPayload: TokenPayLoadType =
           getTokenPayload(refreshToken as string);
-        if (!_.isUndefined(refreshTokenPayload.exp) &&  now > refreshTokenPayload.exp) {
+        if (_.isUndefined(refreshTokenPayload.exp)) {
+          console.log(`===========> refresh token exp is undefined`);
+          throw {
+            status: CommonStatusCode.UNAUTHORIZED,
+            message: CommonStatusMessage.UNAUTHORIZED,
+          };
+        }
+        
+        // refresh token expired
+        if (now > refreshTokenPayload.exp) {
           console.log(`===========> 2. now: ${now} > refreshToken exp ${token}`);
 
           // 유효하지 않은 refresh token 삭제
           await Redis.remove(
             generateRefreshTokenKey(refreshTokenPayload.email)
           );
-
-          onFailureHandler({
+          throw {
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
-          });
+          };
         } else {
           // 토큰 연장
           request.newToken = createToken({
