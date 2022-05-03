@@ -19,9 +19,7 @@ export type CreateTokenParamsType = {
   jwtExpired?: string | number;
 } & PayLoadItemType;
 
-export type TokenPayLoadType = {
-  exp: number;
-} & PayLoadItemType;
+export type TokenPayLoadType = jwt.JwtPayload & PayLoadItemType;
 
 /**
  * @description
@@ -44,17 +42,11 @@ export const createToken = ({
 };
 
 export const getTokenPayload = (token: string): TokenPayLoadType => {
-  let payload = {} as TokenPayLoadType;
-
-  if (!_.isEmpty(token)) {
-    payload = {
-      ...(jwt.verify(token, config.jwtSecret, {
-        ignoreExpiration: true,
-      }) as TokenPayLoadType),
-    };
-  }
-
-  return payload;
+  return {
+    ...(jwt.verify(token, config.jwtSecret, {
+      ignoreExpiration: true,
+    }) as TokenPayLoadType),
+  };
 };
 
 export const checkToken = async (request: IRequest): Promise<void> => {
@@ -69,15 +61,13 @@ export const checkToken = async (request: IRequest): Promise<void> => {
       const jwtPayload: TokenPayLoadType = getTokenPayload(token);
 
       // 토큰이 유효하지 않다.
-      if (now > jwtPayload.exp) {
+      if (!_.isUndefined(jwtPayload.exp) && now > jwtPayload.exp) {
         const refreshToken = (await Redis.get(
           generateRefreshTokenKey(jwtPayload.email)
-        )) as string;
+        ));
 
-        if (_.isEmpty(refreshToken)) {
-          console.log(
-            `===========> 1. refreshToken is Empty ${token}, refreshToken=${refreshToken}`
-          );
+        if (_.isNull(refreshToken)) {
+          console.log(`===========> 1. refreshToken is Null ${token}`);
           onFailureHandler({
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
@@ -85,9 +75,9 @@ export const checkToken = async (request: IRequest): Promise<void> => {
         }
 
         const refreshTokenPayload: TokenPayLoadType =
-          getTokenPayload(refreshToken);
-        if (now > refreshTokenPayload.exp) {
-          console.log(`===========> 2. ${now} > refreshToken exp ${token}`);
+          getTokenPayload(refreshToken as string);
+        if (!_.isUndefined(refreshTokenPayload.exp) &&  now > refreshTokenPayload.exp) {
+          console.log(`===========> 2. now: ${now} > refreshToken exp ${token}`);
 
           // 유효하지 않은 refresh token 삭제
           await Redis.remove(
