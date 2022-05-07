@@ -1,6 +1,6 @@
 import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./ajax";
 import { connectMysql, connectRepository } from "./database/mysql";
-import AppRepository from "./database/mysql/repository";
+import AppRepository from "./database/mysql/AppRepository";
 import Redis from "./database/redis";
 import { createDevelopmentExpress, createProductionExpress } from "./express";
 import { getErrorItem, onFailureHandler } from "./function";
