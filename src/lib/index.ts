@@ -1,4 +1,4 @@
-import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./ajax";
+import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./axios";
 import { connectMysql, connectRepository } from "./database/mysql";
 import AppRepository from "./database/mysql/AppRepository";
 import Redis from "./database/redis";
