@@ -3,7 +3,7 @@ import {
   CommonStatusCode,
   CommonStatusMessage,
   getPayload,
-  onFailureHandler
+  onFailureHandler,
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
@@ -106,13 +106,6 @@ export const createUser = async (
 export const updateUser = async (
   conditions: Partial<User>
 ): CommonPromiseAPIResponseType<User> => {
-  if (_.isUndefined(conditions.userId)) {
-    onFailureHandler({
-      status: CommonStatusCode.BAD_REQUEST,
-      message: CommonStatusMessage.BAD_REQUEST,
-    });
-  }
-
   await AppRepository.User.update({ userId: conditions.userId }, conditions);
   return findOneUser({ userId: conditions.userId });
 };

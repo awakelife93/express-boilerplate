@@ -1,9 +1,4 @@
-import {
-  AppRepository,
-  CommonStatusCode,
-  CommonStatusMessage,
-  onFailureHandler,
-} from "@/lib";
+import { AppRepository } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import * as _ from "lodash";
 import { Like } from "typeorm";
@@ -90,13 +85,6 @@ export const createContents = async (
 export const updateContents = async (
   conditions: Partial<Contents>
 ): CommonPromiseAPIResponseType<Contents> => {
-  if (_.isUndefined(conditions.contentId)) {
-    onFailureHandler({
-      status: CommonStatusCode.BAD_REQUEST,
-      message: CommonStatusMessage.BAD_REQUEST,
-    });
-  }
-
   await AppRepository.Contents.update(
     { contentId: conditions.contentId },
     conditions
