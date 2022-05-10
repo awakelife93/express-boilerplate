@@ -6,10 +6,12 @@ import {
   createToken,
   getPayload,
   getTokenPayload,
-  TokenPayLoadType, validateToken
+  TokenPayLoadType,
+  validateToken,
 } from "./jwt";
-import generateRequest, { validateBody } from "./request";
+import generateRequest from "./request";
 import generateResponse from "./response";
+import { validateEntity } from "./validateEntity";
 
 type ClientRequestItemType = {
   /**
@@ -56,7 +58,7 @@ const initializeLocalHostMiddleWare = async (
 ): Promise<void> => {
   await generateRequest(request);
   await generateResponse(response);
-  await validateBody(request, routeItem);
+  await validateEntity(request, routeItem);
 };
 
 const initializeAllMiddleWare = async (
@@ -67,7 +69,7 @@ const initializeAllMiddleWare = async (
   await generateRequest(request);
   await generateResponse(response);
   await validateToken(request);
-  await validateBody(request, routeItem);
+  await validateEntity(request, routeItem);
 };
 
 export {
