@@ -102,7 +102,7 @@ export const updateUser = async (
 export const removeUser = async (
   conditions: Partial<User>
 ): CommonPromiseAPIResponseType<object> => {
-  await updateUser({ userId: conditions.userId });
+  await AppRepository.User.softDelete({ userId: conditions.userId });
   return {};
 };
 
