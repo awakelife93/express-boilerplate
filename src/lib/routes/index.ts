@@ -3,7 +3,7 @@ import {
   getErrorItem,
   initializeMiddleWare,
   IRequest,
-  IResponse
+  IResponse,
 } from "@/lib";
 import { Application, NextFunction } from "express";
 import * as _ from "lodash";
