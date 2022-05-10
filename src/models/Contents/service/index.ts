@@ -9,20 +9,16 @@ import { ContentsRequestType } from "../type";
 export const findContentsCount = async (
   conditions: Partial<ContentsRequestType>
 ): CommonPromiseAPIResponseType<number> => {
-  let query = {
-    where: [{ isDeleted: false }],
-  } as Partial<QueryType>;
+  let query = {} as Partial<QueryType>;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query = {
       where: [
         {
           title: Like(`%${conditions.searchKeyword}%`),
-          isDeleted: false,
         },
         {
           subTitle: Like(`%${conditions.searchKeyword}%`),
-          isDeleted: false,
         },
       ],
     };
@@ -34,17 +30,13 @@ export const findContentsCount = async (
 export const findOneContents = async (
   conditions: Partial<ContentsRequestType>
 ): CommonPromiseAPIResponseType<Contents> => {
-  return await AppRepository.Contents.findOne({
-    ...conditions,
-    isDeleted: false,
-  });
+  return await AppRepository.Contents.findOne({ ...conditions });
 };
 
 export const findContents = async (
   conditions: Partial<ContentsRequestType>
 ): CommonPromiseAPIResponseType<[Contents[], number]> => {
   let query = {
-    where: [{ isDeleted: false }],
     order: {},
   } as QueryType;
 
@@ -52,11 +44,9 @@ export const findContents = async (
     query.where = [
       {
         title: Like(`%${conditions.searchKeyword}%`),
-        isDeleted: false,
       },
       {
         subTitle: Like(`%${conditions.searchKeyword}%`),
-        isDeleted: false,
       },
     ];
   }
@@ -95,6 +85,6 @@ export const updateContents = async (
 export const removeContents = async (
   conditions: Partial<Contents>
 ): CommonPromiseAPIResponseType<object> => {
-  await updateContents({ contentId: conditions.contentId, isDeleted: true });
+  await AppRepository.Contents.softDelete({ contentId: conditions.contentId });
   return {};
 };

@@ -17,20 +17,16 @@ import { UserProfileType, UserRequestType } from "../type";
 export const findUserCount = async (
   conditions: Partial<UserRequestType>
 ): CommonPromiseAPIResponseType<number> => {
-  let query = {
-    where: [{ isDeleted: false }],
-  } as Partial<QueryType>;
+  let query = {} as Partial<QueryType>;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query = {
       where: [
         {
           email: Like(`%${conditions.searchKeyword}%`),
-          isDeleted: false,
         },
         {
           name: Like(`%${conditions.searchKeyword}%`),
-          isDeleted: false,
         },
       ],
     };
@@ -42,17 +38,13 @@ export const findUserCount = async (
 export const findOneUser = async (
   conditions: Partial<UserRequestType>
 ): CommonPromiseAPIResponseType<User> => {
-  return await AppRepository.User.findOne({
-    ...conditions,
-    isDeleted: false,
-  });
+  return await AppRepository.User.findOne({ ...conditions });
 };
 
 export const findUser = async (
   conditions: Partial<UserRequestType>
 ): CommonPromiseAPIResponseType<[User[], number]> => {
   let query = {
-    where: [{ isDeleted: false }],
     order: {},
   } as QueryType;
 
@@ -60,11 +52,9 @@ export const findUser = async (
     query.where = [
       {
         email: Like(`%${conditions.searchKeyword}%`),
-        isDeleted: false,
       },
       {
         name: Like(`%${conditions.searchKeyword}%`),
-        isDeleted: false,
       },
     ];
   }
@@ -88,7 +78,6 @@ export const createUser = async (
 ): CommonPromiseAPIResponseType<User> => {
   let user = (await findOneUser({
     email: conditions.email,
-    isDeleted: false,
   })) as User;
 
   // 동일한 계정 정보가 있다면
@@ -113,7 +102,7 @@ export const updateUser = async (
 export const removeUser = async (
   conditions: Partial<User>
 ): CommonPromiseAPIResponseType<object> => {
-  await updateUser({ userId: conditions.userId, isDeleted: true });
+  await updateUser({ userId: conditions.userId });
   return {};
 };
 

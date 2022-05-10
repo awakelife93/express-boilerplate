@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsString } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonEntity } from "../../Common/entity";
 
@@ -27,8 +27,4 @@ export class Contents extends CommonEntity {
     comment: "이미지 링크",
   })
   imageLink!: string;
-
-  @IsBoolean()
-  @Column({ name: "is_deleted", default: false, comment: "삭제 여부" })
-  isDeleted!: boolean;
 }

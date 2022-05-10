@@ -1,13 +1,6 @@
 import { AppRepository } from "@/lib";
 import { hashSync } from "@/utils";
-import {
-  IsBoolean,
-  IsEmail,
-  IsEnum,
-  IsOptional,
-  IsString,
-  Length
-} from "class-validator";
+import { IsEmail, IsEnum, IsString, Length } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { CommonEntity } from "../../Common/entity";
 import { UserRole } from "../type";
@@ -47,11 +40,6 @@ export class User extends CommonEntity {
     default: UserRole.USER,
   })
   role!: UserRole;
-
-  @IsOptional()
-  @IsBoolean()
-  @Column({ name: "is_deleted", default: false, comment: "삭제 여부" })
-  isDeleted!: boolean;
 
   async findPassword(userId: number): Promise<string> {
     const user = await AppRepository.User.createQueryBuilder("user")

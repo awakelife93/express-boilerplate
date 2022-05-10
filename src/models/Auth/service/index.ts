@@ -5,7 +5,7 @@ import {
   createToken,
   getPayload,
   onFailureHandler,
-  Redis
+  Redis,
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
@@ -20,7 +20,6 @@ export const _signIn = async (
 ): CommonPromiseAPIResponseType<AuthResponseType> => {
   const user = (await findOneUser({
     email: conditions.email,
-    isDeleted: false,
   })) as User;
 
   // DB 데이터 유효성 검사
