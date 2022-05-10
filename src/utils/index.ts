@@ -1,4 +1,5 @@
 import config from "@/config";
+import { AppRepository } from "@/lib";
 import { ConfigType } from "@/lib/type";
 import { UserRole } from "@/models/User/type";
 import * as bcrypt from "bcrypt";
@@ -21,12 +22,6 @@ export const generateRefreshTokenKey = (email: string): string => {
   return `${email}_RefreshToken`;
 };
 
-/**
- * nowMemoryPercent
- * @description
- * 해당 인스턴스 서버의 메모리 제공
- * @returns {number}
- */
 export const nowMemoryPercent = (): number => {
   const totalmem = os.totalmem();
   const freemem = os.freemem();
@@ -35,12 +30,6 @@ export const nowMemoryPercent = (): number => {
   return memPercent;
 };
 
-/**
- * healthCheckMemory
- * @description
- * 해당 인스턴스 서버의 메모리 체크
- * @returns {boolean}
- */
 export const healthCheckMemory = (): boolean => {
   const memoryLimit = 90;
   return nowMemoryPercent() >= memoryLimit;
@@ -49,6 +38,16 @@ export const healthCheckMemory = (): boolean => {
 export const isUser = (role: UserRole): boolean => role === UserRole.USER;
 
 export const isAdmin = (role: UserRole): boolean => role === UserRole.ADMIN;
+
+export const findPassword = async (userId: number): Promise<string> => {
+  const user = await AppRepository.User.createQueryBuilder("user")
+    .select("user.userId", "userId")
+    .addSelect("user.password")
+    .where("user.userId = :userId", { userId })
+    .getOne();
+
+  return user?.password ?? "";
+};
 
 export const generateConfigLog = (): void => {
   console.log("==================================");

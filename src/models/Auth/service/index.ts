@@ -11,7 +11,7 @@ import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { User } from "@/models/User/entity";
 import { findOneUser } from "@/models/User/service";
-import { compareHash, generateRefreshTokenKey } from "@/utils";
+import { compareHash, findPassword, generateRefreshTokenKey } from "@/utils";
 import * as _ from "lodash";
 import { AuthRequestType, AuthResponseType } from "../type";
 
@@ -39,7 +39,7 @@ export const _signIn = async (
   }
 
   // 패스워드 검사
-  const password = await new User().findPassword(user.userId);
+  const password = await findPassword(user.userId);
   if (!compareHash(conditions.password, password)) {
     onFailureHandler({
       status: CommonStatusCode.UNAUTHORIZED,

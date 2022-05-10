@@ -12,7 +12,7 @@ export type UserRequestType = UserRequestSubOptionType &
 
 export type UserParamsType = Omit<
   User,
-  "userId" | "role" | "createdDt" | "updatedDt" | "findPassword" | "deletedDt"
+  "userId" | "role" | "createdDt" | "updatedDt" | "deletedDt"
 >;
 
 export type UserProfileType = {

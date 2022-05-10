@@ -1,4 +1,3 @@
-import { AppRepository } from "@/lib";
 import { hashSync } from "@/utils";
 import { IsEmail, IsEnum, IsString, Length } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
@@ -40,14 +39,4 @@ export class User extends CommonEntity {
     default: UserRole.USER,
   })
   role!: UserRole;
-
-  async findPassword(userId: number): Promise<string> {
-    const user = await AppRepository.User.createQueryBuilder("user")
-      .select("user.userId", "userId")
-      .addSelect("user.password")
-      .where("user.userId = :userId", { userId })
-      .getOne();
-
-    return user?.password ?? "";
-  }
 }
