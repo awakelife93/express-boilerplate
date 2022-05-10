@@ -1,5 +1,6 @@
 import { ClassConstructor, plainToClass } from "class-transformer";
 import { validateOrReject, ValidationError } from "class-validator";
+import * as _ from "lodash";
 import { IRequest } from ".";
 import {
   CommonStatusCode,
@@ -8,7 +9,6 @@ import {
   UnknownObject,
 } from "..";
 import { RouteItemType } from "../routes/items";
-import _ = require("lodash");
 
 export const validateEntity = async (
   request: IRequest,
