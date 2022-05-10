@@ -12,5 +12,5 @@ export type ContentsRequestType = ContentsRequestSubOptionType &
 
 export type ContentParamsType = Omit<
   Contents,
-  "contentId" | "isDeleted" | "createdDt" | "updatedDt"
+  "contentId" | "createdDt" | "updatedDt" | "deletedDt"
 >;

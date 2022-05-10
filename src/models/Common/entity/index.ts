@@ -1,4 +1,4 @@
-import { CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { CreateDateColumn, DeleteDateColumn, UpdateDateColumn } from "typeorm";
 
 export class CommonEntity {
   @CreateDateColumn({
@@ -17,4 +17,12 @@ export class CommonEntity {
     onUpdate: "CURRENT_TIMESTAMP(6)",
   })
   updatedDt!: string;
+
+  @DeleteDateColumn({
+    name: "deleted_dt",
+    type: "timestamp",
+    comment: "삭제 일자",
+    onUpdate: "CURRENT_TIMESTAMP(6)",
+  })
+  deletedDt!: string;
 }
