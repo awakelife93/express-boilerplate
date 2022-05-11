@@ -73,9 +73,9 @@ class App {
 
   private getApplication(): Function {
     const applications = {
-      production: this.onCreateProductionApp,
-      development: this.onCreateDevelopmentApp,
-      localhost: this.onCreateLocalHostApp,
+      production: () => this.onCreateProductionApp(),
+      development: () => this.onCreateDevelopmentApp(),
+      localhost: () => this.onCreateLocalHostApp(),
     };
 
     const application = applications[config.NODE_ENV];
