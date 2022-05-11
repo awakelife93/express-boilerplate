@@ -2,13 +2,13 @@ import {
   AppRepository,
   CommonStatusCode,
   CommonStatusMessage,
-  getPayload,
-  onFailureHandler,
+  getPayload
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { _signOut } from "@/models/Auth/service";
 import { QueryType } from "@/models/Common/type";
+import { onFailureHandler } from "@/utils";
 import * as _ from "lodash";
 import { Like } from "typeorm";
 import { User } from "../entity";

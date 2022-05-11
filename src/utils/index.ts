@@ -1,18 +1,10 @@
 import config from "@/config";
-import { AppRepository } from "@/lib";
 import { ConfigType } from "@/lib/type";
-import { UserRole } from "@/models/User/type";
-import * as bcrypt from "bcrypt";
 import * as _ from "lodash";
 import * as os from "os";
-
-export const hashSync = (data: string, saltRounds: number = 10): string => {
-  return bcrypt.hashSync(data, saltRounds);
-};
-
-export const compareHash = (oldHash: string, newHash: string): boolean => {
-  return bcrypt.compareSync(oldHash, newHash);
-};
+import { getErrorItem, HandlerParamsType, onFailureHandler } from "./error";
+import { compareSync, hashSync } from "./hash";
+import { findPassword, isAdmin, isUser } from "./user";
 
 export const generateRefreshTokenKey = (email: string): string => {
   if (_.isEmpty(email)) {
@@ -33,20 +25,6 @@ export const nowMemoryPercent = (): number => {
 export const healthCheckMemory = (): boolean => {
   const memoryLimit = 90;
   return nowMemoryPercent() >= memoryLimit;
-};
-
-export const isUser = (role: UserRole): boolean => role === UserRole.USER;
-
-export const isAdmin = (role: UserRole): boolean => role === UserRole.ADMIN;
-
-export const findPassword = async (userId: number): Promise<string> => {
-  const user = await AppRepository.User.createQueryBuilder("user")
-    .select("user.userId", "userId")
-    .addSelect("user.password")
-    .where("user.userId = :userId", { userId })
-    .getOne();
-
-  return user?.password ?? "";
 };
 
 export const generateConfigLog = (): void => {
@@ -75,4 +53,15 @@ export const generateConfigLog = (): void => {
   console.log("*");
   console.log("*");
   console.log("==================================");
+};
+
+export {
+  isAdmin,
+  isUser,
+  findPassword,
+  compareSync,
+  hashSync,
+  getErrorItem,
+  HandlerParamsType,
+  onFailureHandler
 };

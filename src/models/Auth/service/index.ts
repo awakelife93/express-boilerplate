@@ -4,14 +4,13 @@ import {
   CommonStatusMessage,
   createToken,
   getPayload,
-  onFailureHandler,
-  Redis,
+  Redis
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { User } from "@/models/User/entity";
 import { findOneUser } from "@/models/User/service";
-import { compareHash, findPassword, generateRefreshTokenKey } from "@/utils";
+import { compareSync, findPassword, generateRefreshTokenKey, onFailureHandler } from "@/utils";
 import * as _ from "lodash";
 import { AuthRequestType, AuthResponseType } from "../type";
 
@@ -40,7 +39,7 @@ export const _signIn = async (
 
   // 패스워드 검사
   const password = await findPassword(user.userId);
-  if (!compareHash(conditions.password, password)) {
+  if (!compareSync(conditions.password, password)) {
     onFailureHandler({
       status: CommonStatusCode.UNAUTHORIZED,
       message: CommonStatusMessage.UNAUTHORIZED,

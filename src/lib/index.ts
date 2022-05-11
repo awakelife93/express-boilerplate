@@ -3,7 +3,6 @@ import { connectMysql, connectRepository } from "./database/mysql";
 import AppRepository from "./database/mysql/AppRepository";
 import Redis from "./database/redis";
 import { createDevelopmentExpress, createProductionExpress } from "./express";
-import { getErrorItem, onFailureHandler } from "./function";
 import {
   createToken,
   getPayload,
@@ -12,7 +11,7 @@ import {
   IRequest,
   IResponse,
   TokenPayLoadType,
-  validateToken,
+  validateToken
 } from "./middleware";
 import createRoute from "./routes";
 import { initializeSentry } from "./sentry";
@@ -26,8 +25,6 @@ export {
   createProductionExpress,
   createServer,
   createRoute,
-  onFailureHandler,
-  getErrorItem,
   CommonStatusCode,
   CommonStatusMessage,
   AppRepository,

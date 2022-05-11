@@ -18,11 +18,7 @@ export const onFailureHandler = ({
   };
 };
 
-export const getErrorItem = (error: unknown): HandlerParamsType => {
-  const item = {
-    status: CommonStatusCode.INTERNAL_SERVER_ERROR,
-  } as HandlerParamsType;
-
+const generateErrorItem = (error: unknown, item: HandlerParamsType) => {
   if (typeof error === "string") {
     item.message = error;
   } else if (error instanceof Error) {
@@ -36,4 +32,12 @@ export const getErrorItem = (error: unknown): HandlerParamsType => {
   }
 
   return item;
+};
+
+export const getErrorItem = (error: unknown): HandlerParamsType => {
+  const item = {
+    status: CommonStatusCode.INTERNAL_SERVER_ERROR,
+  } as HandlerParamsType;
+
+  return generateErrorItem(error, item);
 };
