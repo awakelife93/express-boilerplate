@@ -1,7 +1,7 @@
 import {
   AppRepository,
   createDevelopmentExpress,
-  createProductionExpress,
+  createProductionExpress
 } from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
@@ -11,7 +11,7 @@ import {
   connectRepository,
   createRoute,
   createServer,
-  initializeSentry,
+  initializeSentry
 } from "./lib";
 import redis from "./lib/database/redis";
 import { generateConfigLog } from "./utils";
@@ -48,7 +48,7 @@ class App {
     await AppRepository.generateTestData();
   }
 
-  private onCreateLocalHostApp = async (): Promise<void> => {
+  private async onCreateLocalHostApp(): Promise<void> {
     const server: Application = createDevelopmentExpress();
 
     this.onCreateRoute(server);
@@ -61,7 +61,7 @@ class App {
   // * localhost환경과 달라야 할 경우 확장
   private onCreateDevelopmentApp = this.onCreateLocalHostApp;
 
-  private onCreateProductionApp = async (): Promise<void> => {
+  private async onCreateProductionApp(): Promise<void> {
     const server: Application = createProductionExpress();
 
     this.onInitializeSentry(server);
@@ -71,7 +71,7 @@ class App {
     await this.onConnectRepository();
   };
 
-  private getApplication = (): Function => {
+  private getApplication(): Function {
     const applications = {
       production: this.onCreateProductionApp,
       development: this.onCreateDevelopmentApp,
@@ -89,7 +89,7 @@ class App {
     }
   };
 
-  startApplication = async (): Promise<void> => {
+  async startApplication(): Promise<void> {
     try {
       generateConfigLog();
       const application = this.getApplication();
