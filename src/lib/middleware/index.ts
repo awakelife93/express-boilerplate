@@ -7,7 +7,7 @@ import {
   getPayload,
   getTokenPayload,
   TokenPayLoadType,
-  validateToken,
+  validateToken
 } from "./jwt";
 import generateRequest from "./request";
 import generateResponse from "./response";
@@ -39,7 +39,7 @@ const initializeMiddleWare = async (
     if (config.NODE_ENV === "localhost") {
       await initializeLocalHostMiddleWare(request, response, routeItem);
     } else {
-      await initializeAllMiddleWare(request, response, routeItem);
+      await initializeProductionMiddleWare(request, response, routeItem);
     }
 
     next();
@@ -61,7 +61,7 @@ const initializeLocalHostMiddleWare = async (
   await validateEntity(request, routeItem);
 };
 
-const initializeAllMiddleWare = async (
+const initializeProductionMiddleWare = async (
   request: IRequest,
   response: IResponse,
   routeItem: RouteItemType
