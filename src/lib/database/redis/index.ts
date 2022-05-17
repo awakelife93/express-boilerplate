@@ -8,7 +8,7 @@ import _ = require("lodash");
  * EX: s
  * PS: ms
  */
-type expireModeType = "EX" | "PX";
+type ExpireModeType = "EX" | "PX";
 
 class Redis {
   private readonly client!: redis.RedisClient;
@@ -24,7 +24,7 @@ class Redis {
   set(
     key: string,
     value: string,
-    mode: expireModeType = "PX",
+    mode: ExpireModeType = "PX",
     time: number = config.jwtRefreshExpireMS
   ): void {
     this.client.set(key, value, mode, time);

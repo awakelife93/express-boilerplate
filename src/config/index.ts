@@ -3,7 +3,7 @@ import { NodeEnvType } from "@/lib/type";
 import "dotenv/config";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-type mysqlType = Pick<
+type MysqlType = Pick<
   MysqlConnectionOptions,
   "port" | "host" | "username" | "database" | "password"
 >;
@@ -14,7 +14,7 @@ export type ConfigType = {
   port: string | number;
   redis: RedisConfigType;
   mysql: {
-    [env in NodeEnvType]: mysqlType;
+    [env in NodeEnvType]: MysqlType;
   };
   jwtSecret: string;
   jwtExpireMS: number;
