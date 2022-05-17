@@ -1,7 +1,7 @@
 import {
   AppRepository,
   createDevelopmentExpress,
-  createProductionExpress
+  createProductionExpress,
 } from "@/lib";
 import { Application } from "express";
 import * as _ from "lodash";
@@ -11,9 +11,8 @@ import {
   connectRepository,
   createRoute,
   createServer,
-  initializeSentry
+  initializeSentry,
 } from "./lib";
-import redis from "./lib/database/redis";
 import { generateConfigLog } from "./utils";
 
 class App {
@@ -35,7 +34,6 @@ class App {
   private async onConnectDB(): Promise<void> {
     console.log("App Connected DB");
     await connectMysql();
-    await redis.connectRedis();
   }
 
   private async onConnectRepository(): Promise<void> {
@@ -48,7 +46,7 @@ class App {
     await AppRepository.generateTestData();
   }
 
-  private async onCreateLocalHostApp(): Promise<void> {
+  private onCreateLocalHostApp = async (): Promise<void> => {
     const server: Application = createDevelopmentExpress();
 
     this.onCreateRoute(server);
@@ -61,7 +59,7 @@ class App {
   // * localhost환경과 달라야 할 경우 확장
   private onCreateDevelopmentApp = this.onCreateLocalHostApp;
 
-  private async onCreateProductionApp(): Promise<void> {
+  private onCreateProductionApp = async (): Promise<void> => {
     const server: Application = createProductionExpress();
 
     this.onInitializeSentry(server);
@@ -71,11 +69,11 @@ class App {
     await this.onConnectRepository();
   };
 
-  private getApplication(): Function {
+  private getApplication = (): Function => {
     const applications = {
-      production: () => this.onCreateProductionApp(),
-      development: () => this.onCreateDevelopmentApp(),
-      localhost: () => this.onCreateLocalHostApp(),
+      production: this.onCreateProductionApp,
+      development: this.onCreateDevelopmentApp,
+      localhost: this.onCreateLocalHostApp,
     };
 
     const application = applications[config.NODE_ENV];
@@ -89,7 +87,7 @@ class App {
     }
   };
 
-  async startApplication(): Promise<void> {
+  startApplication = async (): Promise<void> => {
     try {
       generateConfigLog();
       const application = this.getApplication();
