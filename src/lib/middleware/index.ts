@@ -7,7 +7,7 @@ import {
   getPayload,
   getTokenPayload,
   TokenPayLoadType,
-  validateToken
+  validateToken,
 } from "./jwt";
 import generateRequest from "./request";
 import generateResponse from "./response";
