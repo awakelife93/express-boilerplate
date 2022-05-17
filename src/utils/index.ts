@@ -1,5 +1,4 @@
-import config from "@/config";
-import { ConfigType } from "@/lib/type";
+import config, { ConfigType } from "@/config";
 import * as _ from "lodash";
 import * as os from "os";
 import { getErrorItem, HandlerParamsType, onFailureHandler } from "./error";
@@ -63,5 +62,5 @@ export {
   hashSync,
   getErrorItem,
   HandlerParamsType,
-  onFailureHandler
+  onFailureHandler,
 };

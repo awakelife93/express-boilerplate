@@ -10,7 +10,7 @@ export type PayLoadItemType = {
 };
 
 export type CreateTokenParamsType = {
-  jwtExpired?: string | number;
+  jwtExpireMS?: number;
 } & PayLoadItemType;
 
 export type TokenPayLoadType = jwt.JwtPayload & Partial<PayLoadItemType>;
@@ -18,7 +18,7 @@ export type TokenPayLoadType = jwt.JwtPayload & Partial<PayLoadItemType>;
 export const createToken = ({
   userId,
   email,
-  jwtExpired,
+  jwtExpireMS,
 }: CreateTokenParamsType): string => {
   return jwt.sign(
     {
@@ -26,7 +26,7 @@ export const createToken = ({
       email,
     },
     config.jwtSecret,
-    { expiresIn: jwtExpired ?? config.jwtExpired }
+    { expiresIn: jwtExpireMS ?? config.jwtExpireMS }
   );
 };
 
@@ -126,7 +126,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
           request.newToken = createToken({
             userId: refreshTokenPayload.userId,
             email: refreshTokenPayload.email,
-            jwtExpired: config.jwtExpired,
+            jwtExpireMS: config.jwtExpireMS,
           });
         }
       }
