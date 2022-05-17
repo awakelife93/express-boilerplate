@@ -1,50 +1,39 @@
 import config from "@/config";
+import { NodeEnvType } from "@/lib/type";
 import { ClientOpts } from "redis";
-import { ConnectionOptions } from "typeorm";
+import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-export type TypeOrmConfigType = {
-  [key: string]: ConnectionOptions;
+export type MySQLConfigType = {
+  [env in NodeEnvType]: MysqlConnectionOptions;
 };
 
 export type RedisConfigType = {
-  [key: string]: ClientOpts;
+  [env in NodeEnvType]: ClientOpts;
 };
 
-export const mysqlConfig: TypeOrmConfigType = {
+export const mysqlConfig: MySQLConfigType = {
   localhost: {
+    ...config.mysql.localhost,
     name: "localhost",
     type: "mysql",
-    host: config.mysqlHost,
-    port: Number(config.mysqlPort),
-    username: config.mysqlUserName,
-    password: config.mysqlPassword,
-    database: config.mysqlDataBase,
     synchronize: true,
     logging: false,
     dropSchema: true,
     entities: ["src/models/**/*.ts"],
   },
   development: {
+    ...config.mysql.development,
     name: "development",
     type: "mysql",
-    host: config.mysqlHost,
-    port: Number(config.mysqlPort),
-    username: config.mysqlUserName,
-    password: config.mysqlPassword,
-    database: config.mysqlDataBase,
     synchronize: true,
     logging: false,
     dropSchema: true,
     entities: ["src/models/**/*.ts"],
   },
   production: {
+    ...config.mysql.production,
     name: "production",
     type: "mysql",
-    host: config.mysqlHost,
-    port: Number(config.mysqlPort),
-    username: config.mysqlUserName,
-    password: config.mysqlPassword,
-    database: config.mysqlDataBase,
     synchronize: false,
     logging: true,
     entities: ["src/models/**/*.ts"],
@@ -58,16 +47,7 @@ export const mysqlConfig: TypeOrmConfigType = {
 };
 
 export const redisConfig: RedisConfigType = {
-  localhost: {
-    host: "127.0.0.1",
-    port: 6379,
-  },
-  development: {
-    host: "",
-    port: 6379,
-  },
-  production: {
-    host: "",
-    port: 6379,
-  },
+  localhost: config.redis.localhost,
+  development: config.redis.development,
+  production: config.redis.production,
 };

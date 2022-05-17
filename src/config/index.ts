@@ -1,20 +1,21 @@
+import { RedisConfigType } from "@/lib/database/config";
 import { NodeEnvType } from "@/lib/type";
 import "dotenv/config";
+import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-/**
- * 외부에 노출되는 데이터들이기 때문에 주의해서 사용해야 한다.
- */
+type mysqlType = Pick<
+  MysqlConnectionOptions,
+  "port" | "host" | "username" | "database" | "password"
+>;
+
 export type ConfigType = {
   NODE_ENV: NodeEnvType;
   sentryDSN: string;
   port: string | number;
-  redisPort: string | number;
-  redisHost: string;
-  mysqlPort: string | number;
-  mysqlHost: string;
-  mysqlUserName: string;
-  mysqlDataBase: string;
-  mysqlPassword: string;
+  redis: RedisConfigType;
+  mysql: {
+    [env in NodeEnvType]: mysqlType;
+  };
   jwtSecret: string;
   jwtExpireMS: number;
   jwtRefreshExpireMS: number;
@@ -26,13 +27,55 @@ const config: ConfigType = {
   NODE_ENV: (process.env.NODE_ENV as NodeEnvType) ?? "localhost",
   sentryDSN: process.env.dsn ?? "",
   port: process.env.port ?? 3000,
-  redisPort: process.env.redisPort ?? 6379,
-  redisHost: process.env.redisHost ?? "127.0.0.1",
-  mysqlUserName: process.env.mysqlUserName ?? "root",
-  mysqlPort: process.env.mysqlPort ?? 3306,
-  mysqlHost: process.env.mysqlHost ?? "127.0.0.1",
-  mysqlDataBase: process.env.mysqlDataBase ?? "localDB",
-  mysqlPassword: process.env.mysqlPassword ?? "",
+  redis: {
+    localhost: {
+      host: process.env.redisLocalHost ?? "127.0.0.1",
+      port: process.env.redisLocalHostPort
+        ? Number(process.env.redisLocalHostPort)
+        : 6379,
+    },
+    development: {
+      host: process.env.redisDevelopmentHost ?? "",
+      port: process.env.redisDevelopmentPort
+        ? Number(process.env.redisDevelopmentPort)
+        : 6379,
+    },
+    production: {
+      host: process.env.redisProductionHost ?? "",
+      port: process.env.redisProductionPort
+        ? Number(process.env.redisProductionPort)
+        : 6379,
+    },
+  },
+  mysql: {
+    localhost: {
+      port: process.env.mysqlLocalhostPort
+        ? Number(process.env.mysqlLocalhostPort)
+        : 3306,
+      host: process.env.mysqlLocalHost ?? "127.0.0.1",
+      username: process.env.mysqlLocalHostUserName ?? "root",
+      database: process.env.mysqlLocalHostDataBase ?? "localDB",
+      password: process.env.mysqlLocalHostPassword ?? "",
+    },
+    development: {
+      port: process.env.mysqlDevelopmentPort
+        ? Number(process.env.mysqlDevelopmentPort)
+        : 3306,
+      host: process.env.mysqlDevelopmentHost ?? "",
+      username: process.env.mysqlDevelopmentUserName ?? "",
+      database: process.env.mysqlDevelopmentDataBase ?? "",
+      password: process.env.mysqlDevelopmentPassword ?? "",
+    },
+    production: {
+      port: process.env.mysqlProductionPort
+        ? Number(process.env.mysqlProductionPort)
+        : 3306,
+      host: process.env.mysqlProductionHost ?? "",
+      username: process.env.mysqlProductionUserName ?? "",
+      database: process.env.mysqlProductionDataBase ?? "",
+      password: process.env.mysqlProductionPassword ?? "",
+    },
+  },
   jwtSecret: process.env.jwtSecret ?? "secret",
   jwtExpireMS: process.env.jwtExpireMS
     ? Number(process.env.jwtExpireMS)

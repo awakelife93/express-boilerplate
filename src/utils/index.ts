@@ -29,10 +29,6 @@ export const healthCheckMemory = (): boolean => {
 export const generateConfigLog = (): void => {
   console.log("==================================");
   console.log("*");
-  console.log("*");
-  console.log("*");
-  console.log("*");
-  console.log("*");
   console.log(
     `* start time: ${new Date().toLocaleDateString(config.timezone, {
       year: "numeric",
@@ -44,12 +40,14 @@ export const generateConfigLog = (): void => {
     })}`
   );
   Object.keys(config).forEach((key) => {
-    console.log(`* ${key}: ${config[key as keyof ConfigType]}`);
+    const value = config[key as keyof ConfigType];
+    if (_.isObjectLike(value)) {
+      console.log(`* ${key}: `);
+      console.log(value);
+    } else {
+      console.log(`* ${key}: ${value}`);
+    }
   });
-  console.log("*");
-  console.log("*");
-  console.log("*");
-  console.log("*");
   console.log("*");
   console.log("==================================");
 };
