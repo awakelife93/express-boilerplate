@@ -2,21 +2,32 @@ import config from "@/config";
 import * as redis from "redis";
 import { promisify } from "util";
 import { redisConfig } from "../config";
+import _ = require("lodash");
+
+/**
+ * EX: s
+ * PS: ms
+ */
+type expireModeType = "EX" | "PX";
 
 class Redis {
-  private client!: redis.RedisClient;
+  private readonly client!: redis.RedisClient;
 
-  connectRedis(): void {
+  constructor() {
     this.client = redis.createClient(redisConfig[config.NODE_ENV]);
   }
 
   get(key: string): Promise<string | null> {
-    const _get = promisify(this.client.get).bind(this.client);
-    return _get(key);
+    return promisify(this.client.get).bind(this.client)(key);
   }
 
-  set(key: string, value: string): void {
-    this.client.set(key, value);
+  set(
+    key: string,
+    value: string,
+    mode: expireModeType = "PX",
+    time: number = config.jwtRefreshExpireMS
+  ): void {
+    this.client.set(key, value, mode, time);
   }
 
   remove(key: string): void {
