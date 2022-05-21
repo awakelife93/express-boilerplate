@@ -1,4 +1,4 @@
-import { IRequest, UnknownObject } from "@/lib";
+import { IRequest } from "@/lib";
 import * as _ from "lodash";
 
 export default async (request: IRequest): Promise<void> => {
@@ -17,14 +17,12 @@ const createItem = async (request: IRequest): Promise<void> => {
   switch (request.method) {
     case "GET":
     case "DELETE":
-      const query: UnknownObject = { ...request.query, ...request.params };
-      request.item = query;
+      request.item = { ...request.query, ...request.params };
       break;
     case "POST":
     case "PUT":
     case "PATCH":
-      const body: UnknownObject = { ...request.body, ...request.params };
-      request.item = body;
+      request.item = { ...request.body, ...request.params };
       break;
   }
 };
