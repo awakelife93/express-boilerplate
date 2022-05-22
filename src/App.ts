@@ -46,7 +46,7 @@ class App {
     await AppRepository.generateTestData();
   }
 
-  private onCreateLocalHostApp = async (): Promise<void> => {
+  private async onCreateLocalHostApp(): Promise<void> {
     const server: Application = createDevelopmentExpress();
 
     this.onCreateRoute(server);
@@ -54,12 +54,12 @@ class App {
     await this.onConnectDB();
     await this.onConnectRepository();
     await this.onCreateTestSample();
-  };
+  }
 
   // * localhost환경과 달라야 할 경우 확장
   private onCreateDevelopmentApp = this.onCreateLocalHostApp;
 
-  private onCreateProductionApp = async (): Promise<void> => {
+  private async onCreateProductionApp(): Promise<void> {
     const server: Application = createProductionExpress();
 
     this.onInitializeSentry(server);
@@ -67,13 +67,13 @@ class App {
     this.onCreateServer(server);
     await this.onConnectDB();
     await this.onConnectRepository();
-  };
+  }
 
-  private getApplication = (): Function => {
+  private getApplication(): Function {
     const applications = {
-      production: this.onCreateProductionApp,
-      development: this.onCreateDevelopmentApp,
-      localhost: this.onCreateLocalHostApp,
+      production: () => this.onCreateProductionApp(),
+      development: () => this.onCreateDevelopmentApp(),
+      localhost: () => this.onCreateLocalHostApp(),
     };
 
     const application = applications[config.NODE_ENV];
@@ -85,9 +85,9 @@ class App {
       config.NODE_ENV = "localhost";
       return this.onCreateLocalHostApp;
     }
-  };
+  }
 
-  startApplication = async (): Promise<void> => {
+  async startApplication(): Promise<void> {
     try {
       generateConfigLog();
       const application = this.getApplication();
@@ -95,7 +95,7 @@ class App {
     } catch (error: unknown) {
       console.log(error);
     }
-  };
+  }
 }
 
 export default new App();
