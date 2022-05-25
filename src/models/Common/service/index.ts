@@ -4,17 +4,14 @@ import {
   CommonPromiseAPIResponseType,
 } from "@/lib/type";
 import { findContentsCount } from "@/models/Contents/service";
-import { User } from "@/models/User/entity";
-import { findUser } from "@/models/User/service";
+import { findUserCount } from "@/models/User/service";
+import { UserRole } from "@/models/User/type";
 import {
   HandlerParamsType,
   healthCheckMemory,
-  isAdmin,
-  isUser,
   nowMemoryPercent,
   onFailureHandler,
 } from "@/utils";
-import * as _ from "lodash";
 
 export const _health = (): CommonAPIResponseType<HandlerParamsType> => {
   if (healthCheckMemory()) {
@@ -32,23 +29,14 @@ export const _health = (): CommonAPIResponseType<HandlerParamsType> => {
 
 export const _findDashboardCount =
   async (): CommonPromiseAPIResponseType<object> => {
-    const _users = await findUser({});
-    const users = _.isUndefined(_users) ? [] : _users[0];
-
-    const client = users.filter((user: User) => isUser(user.role));
-
-    const admin = users.filter((user: User) => isAdmin(user.role));
-
-    const contents = await findContentsCount({});
-
     return {
       usersCount: {
-        total: users.length,
-        client: client.length,
-        admin: admin.length,
+        total: await findUserCount({}),
+        client: await findUserCount({ role: UserRole.USER }),
+        admin: await findUserCount({ role: UserRole.ADMIN }),
       },
       contentsCount: {
-        total: contents,
+        total: await findContentsCount({}),
       },
     };
   };
