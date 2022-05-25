@@ -6,7 +6,7 @@ import _ = require("lodash");
 
 /**
  * EX: s
- * PS: ms
+ * PX: ms
  */
 type ExpireModeType = "EX" | "PX";
 
