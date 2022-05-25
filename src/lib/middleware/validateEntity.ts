@@ -3,11 +3,7 @@ import { ClassConstructor, plainToClass } from "class-transformer";
 import { validateOrReject, ValidationError } from "class-validator";
 import * as _ from "lodash";
 import { IRequest } from ".";
-import {
-  CommonStatusCode,
-  CommonStatusMessage,
-  UnknownObject
-} from "..";
+import { CommonStatusCode, CommonStatusMessage, UnknownObject } from "..";
 import { RouteItemType } from "../routes/items";
 
 export const validateEntity = async (

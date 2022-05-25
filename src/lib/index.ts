@@ -11,7 +11,7 @@ import {
   IRequest,
   IResponse,
   TokenPayLoadType,
-  validateToken
+  validateToken,
 } from "./middleware";
 import createRoute from "./routes";
 import { initializeSentry } from "./sentry";

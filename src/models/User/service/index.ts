@@ -2,7 +2,7 @@ import {
   AppRepository,
   CommonStatusCode,
   CommonStatusMessage,
-  getPayload
+  getPayload,
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";

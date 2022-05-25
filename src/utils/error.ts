@@ -6,7 +6,10 @@ export type HandlerParamsType = {
   data?: UnknownObject;
 };
 
-const generateErrorItem = (error: unknown, item: HandlerParamsType): HandlerParamsType => {
+const generateErrorItem = (
+  error: unknown,
+  item: HandlerParamsType
+): HandlerParamsType => {
   if (typeof error === "string") {
     item.message = error;
   } else if (error instanceof Error) {

@@ -1,7 +1,7 @@
 import { IRequest, IResponse } from "@/lib";
 import {
   CommonAPIResponseType,
-  CommonPromiseAPIResponseType
+  CommonPromiseAPIResponseType,
 } from "@/lib/type";
 import { HandlerParamsType } from "@/utils";
 import { _findDashboardCount, _health } from "../service";
