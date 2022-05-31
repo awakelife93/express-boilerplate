@@ -36,9 +36,7 @@ export const findOneContents = async (
 export const findContents = async (
   conditions: Partial<ContentsRequestType>
 ): CommonPromiseAPIResponseType<[Contents[], number]> => {
-  let query = {
-    order: {},
-  } as QueryType;
+  let query = {} as QueryType;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query.where = [

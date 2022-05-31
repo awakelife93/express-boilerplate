@@ -44,9 +44,7 @@ export const findOneUser = async (
 export const findUser = async (
   conditions: Partial<UserRequestType>
 ): CommonPromiseAPIResponseType<[User[], number]> => {
-  let query = {
-    order: {},
-  } as QueryType;
+  let query = {} as QueryType;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query.where = [
