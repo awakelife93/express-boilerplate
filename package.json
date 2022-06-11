@@ -1,28 +1,28 @@
 {
-  "name": "node-api-template",
+  "name": "express-boilerplate",
   "version": "1.0.0",
-  "description": "node template",
+  "description": "express boilerplate",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "export port=3000 && nodemon src/index.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/awakelife93/node-api-template.git"
+    "url": "git+https://github.com/awakelife93/express-boilerplate.git"
   },
   "keywords": [
-    "node",
-    "template"
+    "express",
+    "boilerplate"
   ],
   "author": "HyunwooPark",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/awakelife93/node-api-template/issues"
+    "url": "https://github.com/awakelife93/express-boilerplate/issues"
   },
   "_moduleAliases": {
     "@": "src"
   },
-  "homepage": "https://github.com/awakelife93/node-api-template#readme",
+  "homepage": "https://github.com/awakelife93/express-boilerplate#readme",
   "dependencies": {
     "@sentry/node": "^6.18.2",
     "@sentry/tracing": "^6.18.2",
