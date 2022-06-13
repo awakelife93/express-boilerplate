@@ -1,8 +1,7 @@
 import config from "@/config";
-import * as redis from "redis";
+import redis from "redis";
 import { promisify } from "util";
 import { redisConfig } from "../config";
-import _ = require("lodash");
 
 /**
  * EX: s

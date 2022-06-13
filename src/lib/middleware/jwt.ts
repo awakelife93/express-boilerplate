@@ -1,8 +1,8 @@
 import config from "@/config";
 import { CommonStatusCode, CommonStatusMessage, IRequest, Redis } from "@/lib";
 import { generateRefreshTokenKey } from "@/utils";
-import * as jwt from "jsonwebtoken";
-import * as _ from "lodash";
+import jwt from "jsonwebtoken";
+import _ from "lodash";
 
 export type PayLoadItemType = {
   userId: number;

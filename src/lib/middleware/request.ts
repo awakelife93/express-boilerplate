@@ -1,5 +1,5 @@
 import { IRequest } from "@/lib";
-import * as _ from "lodash";
+import _ from "lodash";
 
 export default async (request: IRequest): Promise<void> => {
   await createToken(request);

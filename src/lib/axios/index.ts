@@ -1,6 +1,6 @@
 import { UnknownObject } from "@/lib";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import * as _ from "lodash";
+import _ from "lodash";
 
 const generateQueryEndPoint = (
   endPoint: string,

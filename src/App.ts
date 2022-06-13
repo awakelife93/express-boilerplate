@@ -4,7 +4,7 @@ import {
   createProductionExpress,
 } from "@/lib";
 import { Application } from "express";
-import * as _ from "lodash";
+import _ from "lodash";
 import config from "./config";
 import {
   connectMysql,

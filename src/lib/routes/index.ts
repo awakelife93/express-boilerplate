@@ -6,7 +6,7 @@ import {
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
-import * as _ from "lodash";
+import _ from "lodash";
 import RouteItems, { RouteItemType } from "./items";
 
 export default (app: Application): void => {

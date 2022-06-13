@@ -11,7 +11,8 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "module": "CommonJS",
-    "strict": true
+    "strict": true,
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.ts"

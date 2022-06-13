@@ -1,8 +1,8 @@
 import config from "@/config";
-import * as cors from "cors";
-import * as express from "express";
+import cors from "cors";
+import express from "express";
 import helmet from "helmet";
-import * as path from "path";
+import path from "path";
 import Sentry from "./sentry";
 
 export const createDevelopmentExpress = (): express.Application => {

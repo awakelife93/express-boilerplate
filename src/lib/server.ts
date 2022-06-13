@@ -1,6 +1,6 @@
 import config from "@/config";
 import { Application } from "express";
-import * as http from "http";
+import http from "http";
 
 export const createServer = (server: Application): void => {
   http

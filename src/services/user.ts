@@ -1,5 +1,3 @@
-import { QueryType } from "@/types/common";
-import { UserProfileType, UserRequestType } from "@/types/user";
 import {
   AppRepository,
   CommonStatusCode,
@@ -9,8 +7,10 @@ import {
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { User } from "@/models/User";
+import { QueryType } from "@/types/common";
+import { UserProfileType, UserRequestType } from "@/types/user";
 import { onFailureHandler } from "@/utils";
-import * as _ from "lodash";
+import _ from "lodash";
 import { Like } from "typeorm";
 import { _signOut } from "./auth";
 

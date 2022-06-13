@@ -1,6 +1,6 @@
 import config, { ConfigType } from "@/config";
-import * as _ from "lodash";
-import * as os from "os";
+import _ from "lodash";
+import os from "os";
 import { getErrorItem, HandlerParamsType, onFailureHandler } from "./error";
 import { compareSync, hashSync } from "./hash";
 import { findPassword, isAdmin, isUser } from "./user";
