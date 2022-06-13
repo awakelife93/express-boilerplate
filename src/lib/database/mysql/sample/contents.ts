@@ -1,4 +1,4 @@
-import { ContentParamsType } from "@/models/Contents/type";
+import { ContentParamsType } from "@/types/contents";
 
 export const sampleContents: ContentParamsType[] = [
   {

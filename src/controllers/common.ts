@@ -3,8 +3,8 @@ import {
   CommonAPIResponseType,
   CommonPromiseAPIResponseType,
 } from "@/lib/type";
+import { _findDashboardCount, _health } from "@/services/common";
 import { HandlerParamsType } from "@/utils";
-import { _findDashboardCount, _health } from "../service";
 
 export const health = (
   request: IRequest,

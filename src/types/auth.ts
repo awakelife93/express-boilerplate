@@ -1,4 +1,4 @@
-import { UserRole } from "../User/type";
+import { UserRole } from "./user";
 
 export type AuthResponseType = {
   userId: number;

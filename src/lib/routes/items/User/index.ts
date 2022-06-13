@@ -1,4 +1,3 @@
-import { RouteItemType } from "@/lib/routes/items";
 import {
   create,
   find,
@@ -8,8 +7,9 @@ import {
   remove,
   tokenRemove,
   update,
-} from "@/models/User/controller";
-import { User } from "@/models/User/entity";
+} from "@/controllers/user";
+import { RouteItemType } from "@/lib/routes/items";
+import { User } from "@/models/User";
 
 const rootPath = "/users";
 const UserRoute: RouteItemType[] = [

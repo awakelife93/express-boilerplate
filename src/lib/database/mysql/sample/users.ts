@@ -1,4 +1,4 @@
-import { UserParamsType } from "@/models/User/type";
+import { UserParamsType } from "@/types/user";
 
 export const sampleUsers: UserParamsType[] = [
   {

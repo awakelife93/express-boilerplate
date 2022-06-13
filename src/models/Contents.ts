@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsString } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../Common/entity";
+import { CommonEntity } from "./Common";
 
 @Entity("contents")
 export class Contents extends CommonEntity {

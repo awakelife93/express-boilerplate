@@ -1,17 +1,17 @@
+import { UserRole } from "@/types/user";
 import { CommonStatusCode } from "@/lib";
 import {
   CommonAPIResponseType,
   CommonPromiseAPIResponseType,
 } from "@/lib/type";
-import { findContentsCount } from "@/models/Contents/service";
-import { findUserCount } from "@/models/User/service";
-import { UserRole } from "@/models/User/type";
 import {
   HandlerParamsType,
   healthCheckMemory,
   nowMemoryPercent,
   onFailureHandler,
 } from "@/utils";
+import { findContentsCount } from "./contents";
+import { findUserCount } from "./user";
 
 export const _health = (): CommonAPIResponseType<HandlerParamsType> => {
   if (healthCheckMemory()) {

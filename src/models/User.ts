@@ -1,8 +1,8 @@
+import { UserRole } from "@/types/user";
 import { hashSync } from "@/utils";
 import { IsEmail, IsEnum, IsString, Length } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { CommonEntity } from "../../Common/entity";
-import { UserRole } from "../type";
+import { CommonEntity } from "./Common";
 
 @Entity("user")
 export class User extends CommonEntity {

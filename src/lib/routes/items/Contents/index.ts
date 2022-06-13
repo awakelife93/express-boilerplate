@@ -1,4 +1,3 @@
-import { RouteItemType } from "@/lib/routes/items";
 import {
   create,
   find,
@@ -6,8 +5,9 @@ import {
   findOne,
   remove,
   update,
-} from "@/models/Contents/controller";
-import { Contents } from "@/models/Contents/entity";
+} from "@/controllers/contents";
+import { RouteItemType } from "@/lib/routes/items";
+import { Contents } from "@/models/Contents";
 
 const rootPath = "/contents";
 const ContentsRoute: RouteItemType[] = [

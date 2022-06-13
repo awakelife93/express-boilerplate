@@ -1,6 +1,7 @@
+import { ContentsRequestType } from "@/types/contents";
 import { IRequest, IResponse } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { Contents } from "../entity";
+import { Contents } from "@/models/Contents";
 import {
   createContents,
   findContents,
@@ -8,8 +9,7 @@ import {
   findOneContents,
   removeContents,
   updateContents,
-} from "../service";
-import { ContentsRequestType } from "../type";
+} from "@/services/contents";
 
 export const findCount = async (
   request: IRequest,

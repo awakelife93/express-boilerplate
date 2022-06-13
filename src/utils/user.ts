@@ -1,5 +1,5 @@
+import { UserRole } from "@/types/user";
 import { AppRepository } from "@/lib";
-import { UserRole } from "@/models/User/type";
 
 export const isUser = (role: UserRole): boolean => role === UserRole.USER;
 

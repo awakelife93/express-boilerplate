@@ -1,4 +1,5 @@
 import config from "@/config";
+import { AuthRequestType, AuthResponseType } from "@/types/auth";
 import {
   CommonStatusCode,
   CommonStatusMessage,
@@ -8,8 +9,7 @@ import {
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { User } from "@/models/User/entity";
-import { findOneUser } from "@/models/User/service";
+import { User } from "@/models/User";
 import {
   compareSync,
   findPassword,
@@ -17,7 +17,7 @@ import {
   onFailureHandler,
 } from "@/utils";
 import * as _ from "lodash";
-import { AuthRequestType, AuthResponseType } from "../type";
+import { findOneUser } from "./user";
 
 export const _signIn = async (
   conditions: AuthRequestType

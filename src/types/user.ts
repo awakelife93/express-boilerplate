@@ -1,5 +1,5 @@
-import { CommonRequestType, SortType } from "../Common/type";
-import { User } from "./entity";
+import { User } from "@/models/User";
+import { CommonRequestType, SortType } from "./common";
 
 type UserRequestSubOptionType = {
   emailSort: SortType;

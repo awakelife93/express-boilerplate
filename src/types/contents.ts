@@ -1,5 +1,5 @@
-import { CommonRequestType, SortType } from "../Common/type";
-import { Contents } from "./entity";
+import { Contents } from "@/models/Contents";
+import { CommonRequestType, SortType } from "./common";
 
 type ContentsRequestSubOptionType = {
   titleSort: SortType;

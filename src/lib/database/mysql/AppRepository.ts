@@ -1,8 +1,8 @@
 import config from "@/config";
-import { Contents } from "@/models/Contents/entity";
-import { ContentParamsType } from "@/models/Contents/type";
-import { User } from "@/models/User/entity";
-import { UserParamsType, UserRole } from "@/models/User/type";
+import { Contents } from "@/models/Contents";
+import { User } from "@/models/User";
+import { ContentParamsType } from "@/types/contents";
+import { UserParamsType, UserRole } from "@/types/user";
 import { getManager, Repository } from "typeorm";
 import { sampleContents } from "./sample/contents";
 import { sampleUsers } from "./sample/users";
