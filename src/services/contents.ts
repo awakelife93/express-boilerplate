@@ -1,6 +1,6 @@
-import { AppRepository } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { Contents } from "@/models/Contents";
+import AppRepository from "@/repository";
 import { QueryType } from "@/types/common";
 import { ContentsRequestType } from "@/types/contents";
 import _ from "lodash";

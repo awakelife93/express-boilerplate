@@ -1,14 +1,14 @@
 import {
-  AppRepository,
   createDevelopmentExpress,
   createProductionExpress,
+  generateTestData,
 } from "@/lib";
+import AppRepository from "@/repository";
 import { Application } from "express";
 import _ from "lodash";
 import config from "./config";
 import {
   connectMysql,
-  connectRepository,
   createRoute,
   createServer,
   initializeSentry,
@@ -38,12 +38,12 @@ class App {
 
   private async onConnectRepository(): Promise<void> {
     console.log("App Connected Repository");
-    await connectRepository();
+    await AppRepository.connect();
   }
 
   private async onCreateTestSample(): Promise<void> {
     console.log("App Created Test Data");
-    await AppRepository.generateTestData();
+    await generateTestData();
   }
 
   private async onCreateLocalHostApp(): Promise<void> {

@@ -1,6 +1,6 @@
 import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./axios";
-import { connectMysql, connectRepository } from "./database/mysql";
-import AppRepository from "./database/mysql/AppRepository";
+import connectMysql from "./database/mysql";
+import generateTestData from "./database/mysql/sample";
 import Redis from "./database/redis";
 import { createDevelopmentExpress, createProductionExpress } from "./express";
 import {
@@ -20,6 +20,7 @@ import { CommonStatusCode, CommonStatusMessage } from "./status";
 import { UnknownObject } from "./type";
 
 export {
+  generateTestData,
   initializeSentry,
   createDevelopmentExpress,
   createProductionExpress,
@@ -27,10 +28,8 @@ export {
   createRoute,
   CommonStatusCode,
   CommonStatusMessage,
-  AppRepository,
   connectMysql,
   Redis,
-  connectRepository,
   initializeMiddleWare,
   IRequest,
   IResponse,
