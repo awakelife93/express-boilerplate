@@ -1,5 +1,5 @@
 import { deleteAPI, getAPI, patchAPI, postAPI, putAPI } from "./axios";
-import connectMysql from "./database/mysql";
+import { connectMysql } from "./database/mysql";
 import generateTestData from "./database/mysql/sample";
 import Redis from "./database/redis";
 import { createDevelopmentExpress, createProductionExpress } from "./express";
