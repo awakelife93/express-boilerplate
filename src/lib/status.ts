@@ -19,3 +19,8 @@ export enum CommonStatusMessage {
   CONFLICT = "CONFLICT", // 리소스 및 데이터 중복
   INTERNAL_SERVER_ERROR = "INTERNAL_SERVER_ERROR", // 기타 예외 처리
 }
+
+export enum ErrorStatusMessage {
+  GENERATE_REFRESH_TOKEN_KEY_FAIL = "generateRefreshTokenKey Failed - Empty Email",
+  IS_EMPTY_REPOSITORY = "Repository is Empty",
+}

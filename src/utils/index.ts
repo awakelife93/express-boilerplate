@@ -1,4 +1,5 @@
 import config, { ConfigType } from "@/config";
+import { ErrorStatusMessage } from "@/lib/status";
 import _ from "lodash";
 import os from "os";
 import { getErrorItem, HandlerParamsType, onFailureHandler } from "./error";
@@ -7,7 +8,7 @@ import { findPassword, isAdmin, isUser } from "./user";
 
 export const generateRefreshTokenKey = (email: string): string => {
   if (_.isEmpty(email)) {
-    throw new Error("generateRefreshTokenKey Failed - Empty Email");
+    throw new Error(ErrorStatusMessage.GENERATE_REFRESH_TOKEN_KEY_FAIL);
   }
 
   return `${email}_RefreshToken`;
