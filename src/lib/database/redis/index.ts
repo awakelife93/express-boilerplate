@@ -10,7 +10,7 @@ import { redisConfig } from "../config";
 type ExpireModeType = "EX" | "PX";
 
 class Redis {
-  private readonly client!: redis.RedisClient;
+  private readonly client: redis.RedisClient;
 
   constructor() {
     this.client = redis.createClient(redisConfig[config.NODE_ENV]);
