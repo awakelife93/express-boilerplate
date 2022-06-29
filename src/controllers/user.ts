@@ -1,4 +1,3 @@
-import { UserProfileType, UserRequestType } from "@/types/user";
 import { IRequest, IResponse } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { User } from "@/models/User";
@@ -12,6 +11,7 @@ import {
   tokenRemoveUser,
   updateUser,
 } from "@/services/user";
+import { UserProfileType, UserRequestType } from "@/types/user";
 
 export const findOne = async (
   request: IRequest,

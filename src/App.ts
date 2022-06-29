@@ -1,7 +1,4 @@
-import {
-  createExpress,
-  generateTestData
-} from "@/lib";
+import { createExpress, generateTestData } from "@/lib";
 import AppRepository from "@/repository";
 import { Application } from "express";
 import _ from "lodash";
@@ -10,7 +7,7 @@ import {
   connectMysql,
   createRoute,
   createServer,
-  initializeSentry
+  initializeSentry,
 } from "./lib";
 import { generateConfigLog } from "./utils";
 

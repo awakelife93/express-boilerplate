@@ -1,7 +1,7 @@
-import { AuthRequestType, AuthResponseType } from "@/types/auth";
 import { IRequest, IResponse } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
 import { _signIn, _signOut } from "@/services/auth";
+import { AuthRequestType, AuthResponseType } from "@/types/auth";
 
 export const signIn = async (
   request: IRequest,

@@ -1,9 +1,9 @@
-import { UserRole } from "@/types/user";
 import { CommonStatusCode } from "@/lib";
 import {
   CommonAPIResponseType,
   CommonPromiseAPIResponseType,
 } from "@/lib/type";
+import { UserRole } from "@/types/user";
 import {
   HandlerParamsType,
   healthCheckMemory,

@@ -9,7 +9,7 @@ import {
   initializeMiddleWare,
   initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse
+  IResponse,
 } from "./middleware";
 import { initializeSentry } from "./middleware/sentry";
 import createRoute from "./routes";

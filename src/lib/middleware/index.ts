@@ -5,10 +5,7 @@ import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
 import path from "path";
 import { RouteItemType } from "../routes/items";
-import {
-  createToken,
-  getPayload, validateToken
-} from "./jwt";
+import { createToken, getPayload, validateToken } from "./jwt";
 import generateRequest from "./request";
 import generateResponse from "./response";
 import Sentry from "./sentry";
@@ -38,9 +35,17 @@ const initializeRouteLevelMiddleWare = async (
 ): Promise<void> => {
   try {
     if (config.NODE_ENV === "localhost") {
-      await initializeLocalHostRouteLevelMiddleWare(request, response, routeItem);
+      await initializeLocalHostRouteLevelMiddleWare(
+        request,
+        response,
+        routeItem
+      );
     } else {
-      await initializeProductionRouteLevelMiddleWare(request, response, routeItem);
+      await initializeProductionRouteLevelMiddleWare(
+        request,
+        response,
+        routeItem
+      );
     }
 
     next();
@@ -73,23 +78,29 @@ const initializeProductionRouteLevelMiddleWare = async (
   await validateEntity(request, routeItem);
 };
 
-const initializeMiddleWare = (app: express.Application): express.Application => {
+const initializeMiddleWare = (
+  app: express.Application
+): express.Application => {
   if (config.NODE_ENV === "localhost") {
     return initializeLocalHostMiddleWare(app);
   }
-  
+
   return initializeProductionMiddleWare(app);
 };
 
-const initializeLocalHostMiddleWare = (app: express.Application): express.Application => {
+const initializeLocalHostMiddleWare = (
+  app: express.Application
+): express.Application => {
   return setupDefaultMiddleWare(app);
 };
 
-const initializeProductionMiddleWare = (app: express.Application): express.Application => {
+const initializeProductionMiddleWare = (
+  app: express.Application
+): express.Application => {
   app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
   app.use(Sentry.Handlers.tracingHandler());
   app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
-  
+
   return setupDefaultMiddleWare(app);
 };
 
@@ -116,4 +127,3 @@ export {
   createToken,
   getPayload,
 };
-
