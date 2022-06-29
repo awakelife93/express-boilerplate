@@ -1,8 +1,8 @@
 import {
   CommonStatusCode,
-  initializeMiddleWare,
+  initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse,
+  IResponse
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
@@ -14,7 +14,7 @@ export default (app: Application): void => {
     app[item.method](
       item.path,
       (request: IRequest, response: IResponse, next: NextFunction) =>
-        initializeMiddleWare(request, response, next, item),
+        initializeRouteLevelMiddleWare(request, response, next, item),
       async (request: IRequest, response: IResponse) => {
         try {
           const result = await item.next(request, response);

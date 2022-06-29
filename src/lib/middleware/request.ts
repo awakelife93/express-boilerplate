@@ -8,8 +8,7 @@ export default async (request: IRequest): Promise<void> => {
 
 const createToken = (request: IRequest): void => {
   if (!_.isUndefined(request.headers.authorization)) {
-    const token = request.headers.authorization.replace("Bearer ", "");
-    request.token = token ?? "";
+    request.token = request.headers.authorization.replace("Bearer ", "");
   }
 };
 

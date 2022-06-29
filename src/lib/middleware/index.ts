@@ -1,16 +1,17 @@
 import config from "@/config";
 import { getErrorItem } from "@/utils";
-import { NextFunction, Request, Response } from "express";
+import cors from "cors";
+import express, { NextFunction, Request, Response } from "express";
+import helmet from "helmet";
+import path from "path";
 import { RouteItemType } from "../routes/items";
 import {
   createToken,
-  getPayload,
-  getTokenPayload,
-  TokenPayLoadType,
-  validateToken,
+  getPayload, validateToken
 } from "./jwt";
 import generateRequest from "./request";
 import generateResponse from "./response";
+import Sentry from "./sentry";
 import { validateEntity } from "./validateEntity";
 
 type ClientRequestItemType = {
@@ -29,7 +30,7 @@ interface IRequest extends Request, Partial<ClientRequestItemType> {}
 
 interface IResponse extends Response {}
 
-const initializeMiddleWare = async (
+const initializeRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
   next: NextFunction,
@@ -37,9 +38,9 @@ const initializeMiddleWare = async (
 ): Promise<void> => {
   try {
     if (config.NODE_ENV === "localhost") {
-      await initializeLocalHostMiddleWare(request, response, routeItem);
+      await initializeLocalHostRouteLevelMiddleWare(request, response, routeItem);
     } else {
-      await initializeProductionMiddleWare(request, response, routeItem);
+      await initializeProductionRouteLevelMiddleWare(request, response, routeItem);
     }
 
     next();
@@ -51,7 +52,7 @@ const initializeMiddleWare = async (
   }
 };
 
-const initializeLocalHostMiddleWare = async (
+const initializeLocalHostRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
   routeItem: RouteItemType
@@ -61,7 +62,7 @@ const initializeLocalHostMiddleWare = async (
   await validateEntity(request, routeItem);
 };
 
-const initializeProductionMiddleWare = async (
+const initializeProductionRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
   routeItem: RouteItemType
@@ -72,13 +73,47 @@ const initializeProductionMiddleWare = async (
   await validateEntity(request, routeItem);
 };
 
+const initializeMiddleWare = (app: express.Application): express.Application => {
+  if (config.NODE_ENV === "localhost") {
+    return initializeLocalHostMiddleWare(app);
+  }
+  
+  return initializeProductionMiddleWare(app);
+};
+
+const initializeLocalHostMiddleWare = (app: express.Application): express.Application => {
+  return setupDefaultMiddleWare(app);
+};
+
+const initializeProductionMiddleWare = (app: express.Application): express.Application => {
+  app.use(Sentry.Handlers.requestHandler() as express.RequestHandler);
+  app.use(Sentry.Handlers.tracingHandler());
+  app.use(Sentry.Handlers.errorHandler() as express.ErrorRequestHandler);
+  
+  return setupDefaultMiddleWare(app);
+};
+
+const setupDefaultMiddleWare = (app: express.Application) => {
+  app.use(helmet());
+  app.use(
+    cors({
+      origin: config.origin,
+      credentials: true,
+    })
+  );
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.static(path.join(__dirname, "public")));
+
+  return app;
+};
+
 export {
   IRequest,
   IResponse,
   initializeMiddleWare,
-  validateToken,
-  getTokenPayload,
+  initializeRouteLevelMiddleWare,
   createToken,
   getPayload,
-  TokenPayLoadType,
 };
+
