@@ -20,6 +20,9 @@ export const mysqlConfig: MySQLConfigType = {
     logging: false,
     dropSchema: true,
     entities: ["src/models/**/*.ts"],
+    extra: {
+      connectionLimit: 5
+    }
   },
   development: {
     ...config.mysql.development,
@@ -29,6 +32,9 @@ export const mysqlConfig: MySQLConfigType = {
     logging: false,
     dropSchema: true,
     entities: ["src/models/**/*.ts"],
+    extra: {
+      connectionLimit: 10
+    }
   },
   production: {
     ...config.mysql.production,
@@ -38,6 +44,9 @@ export const mysqlConfig: MySQLConfigType = {
     logging: true,
     entities: ["src/models/**/*.ts"],
     migrationsTableName: "migrations",
+    extra: {
+      connectionLimit: 50
+    },
     cli: {
       entitiesDir: "src/entity",
       // migrationsDir: "src/migration",
