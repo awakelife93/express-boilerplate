@@ -3,12 +3,7 @@ import { NodeEnvType } from "@/lib/type";
 import "dotenv/config";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-type MySQLCustomConfigType = {
-  [env in NodeEnvType]: Pick<
-    MysqlConnectionOptions,
-    "port" | "host" | "username" | "database" | "password"
-  >;
-};
+type MySQLCustomConfigType = Pick<MysqlConnectionOptions, "port" | "host" | "username" | "database" | "password">;
 
 export type ConfigType = {
   NODE_ENV: NodeEnvType;
@@ -28,53 +23,19 @@ const config: ConfigType = {
   sentryDSN: process.env.dsn ?? "",
   port: process.env.port ?? 3000,
   redis: {
-    localhost: {
-      host: process.env.redisLocalHost ?? "127.0.0.1",
-      port: process.env.redisLocalHostPort
-        ? Number(process.env.redisLocalHostPort)
-        : 6379,
-    },
-    development: {
-      host: process.env.redisDevelopmentHost ?? "",
-      port: process.env.redisDevelopmentPort
-        ? Number(process.env.redisDevelopmentPort)
-        : 6379,
-    },
-    production: {
-      host: process.env.redisProductionHost ?? "",
-      port: process.env.redisProductionPort
-        ? Number(process.env.redisProductionPort)
-        : 6379,
-    },
+    host: process.env.redisHost ?? "127.0.0.1",
+    port: process.env.redisPort
+      ? Number(process.env.redisPort)
+      : 6379,
   },
   mysql: {
-    localhost: {
-      port: process.env.mysqlLocalhostPort
-        ? Number(process.env.mysqlLocalhostPort)
+    port: process.env.mysqlPort
+        ? Number(process.env.mysqlPort)
         : 3306,
-      host: process.env.mysqlLocalHost ?? "127.0.0.1",
-      username: process.env.mysqlLocalHostUserName ?? "root",
-      database: process.env.mysqlLocalHostDataBase ?? "localDB",
-      password: process.env.mysqlLocalHostPassword ?? "",
-    },
-    development: {
-      port: process.env.mysqlDevelopmentPort
-        ? Number(process.env.mysqlDevelopmentPort)
-        : 3306,
-      host: process.env.mysqlDevelopmentHost ?? "",
-      username: process.env.mysqlDevelopmentUserName ?? "",
-      database: process.env.mysqlDevelopmentDataBase ?? "",
-      password: process.env.mysqlDevelopmentPassword ?? "",
-    },
-    production: {
-      port: process.env.mysqlProductionPort
-        ? Number(process.env.mysqlProductionPort)
-        : 3306,
-      host: process.env.mysqlProductionHost ?? "",
-      username: process.env.mysqlProductionUserName ?? "",
-      database: process.env.mysqlProductionDataBase ?? "",
-      password: process.env.mysqlProductionPassword ?? "",
-    },
+    host: process.env.mysqlHost ?? "127.0.0.1",
+    username: process.env.mysqlUserName ?? "",
+    database: process.env.mysqlDataBase ?? "",
+    password: process.env.mysqlPassword ?? "",
   },
   jwtSecret: process.env.jwtSecret ?? "secret",
   jwtExpireMS: process.env.jwtExpireMS
