@@ -1,0 +1,61 @@
+version: "3.7"
+services:
+  mysql:   
+    image: "mysql/mysql-server:5.7"
+    restart: always
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./data/mysqldata:/var/lib/mysql
+      # If you need my.cnf file, here...
+    environment:
+      - MYSQL_ROOT_PASSWORD=${mysqlRootPassword}
+      - MYSQL_DATABASE=${mysqlDataBase}
+      - MYSQL_USER=${mysqlUserName}
+      - MYSQL_PASSWORD=${mysqlPassword}
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql_network
+  redis:
+      image: redis:alpine
+      command: redis-server --port 6379
+      labels:
+        - "name=redis"
+        - "mode=standalone"
+      ports:
+        - "6379:6379"
+      networks:
+        - redis_network
+  app:
+    build:
+      context: ./
+      # select target (localhost, development, production)
+      target: localhost
+    environment:
+      redisHost: redis
+      redisPort: 6379
+      mysqlHost: mysql
+      mysqlPort: 3306
+      mysqlUserName: ${mysqlUserName}
+      mysqlDataBase: ${mysqlDataBase}
+      mysqlPassword: ${mysqlPassword}
+      # select env (localhost, development, production)
+      NODE_ENV: localhost
+    ports: 
+      - "3000:3000"
+    volumes:
+      - .:/app
+    command: npm run dockerStart
+    depends_on:
+      - redis
+      - mysql
+    networks:
+      - mysql_network
+      - redis_network
+networks:
+  mysql_network:
+    driver: bridge
+  redis_network:
+    driver: bridge
