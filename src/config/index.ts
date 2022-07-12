@@ -3,7 +3,10 @@ import { NodeEnvType } from "@/lib/type";
 import "dotenv/config";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-type MySQLCustomConfigType = Pick<MysqlConnectionOptions, "port" | "host" | "username" | "database" | "password">;
+type MySQLCustomConfigType = Pick<
+  MysqlConnectionOptions,
+  "port" | "host" | "username" | "database" | "password"
+>;
 
 export type ConfigType = {
   NODE_ENV: NodeEnvType;
@@ -24,14 +27,10 @@ const config: ConfigType = {
   port: process.env.port ?? 3000,
   redis: {
     host: process.env.redisHost ?? "127.0.0.1",
-    port: process.env.redisPort
-      ? Number(process.env.redisPort)
-      : 6379,
+    port: process.env.redisPort ? Number(process.env.redisPort) : 6379,
   },
   mysql: {
-    port: process.env.mysqlPort
-        ? Number(process.env.mysqlPort)
-        : 3306,
+    port: process.env.mysqlPort ? Number(process.env.mysqlPort) : 3306,
     host: process.env.mysqlHost ?? "127.0.0.1",
     username: process.env.mysqlUserName ?? "",
     database: process.env.mysqlDataBase ?? "",

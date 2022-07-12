@@ -11,7 +11,7 @@ class AppRepository {
 
   connect(): void {
     const manager = getManager(config.NODE_ENV);
-    
+
     this.user = manager.getRepository(User);
     this.contents = manager.getRepository(Contents);
   }
