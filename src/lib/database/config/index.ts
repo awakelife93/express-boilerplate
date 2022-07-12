@@ -7,13 +7,11 @@ export type MySQLConfigType = {
   [env in NodeEnvType]: MysqlConnectionOptions;
 };
 
-export type RedisConfigType = {
-  [env in NodeEnvType]: ClientOpts;
-};
+export type RedisConfigType = ClientOpts;
 
 export const mysqlConfig: MySQLConfigType = {
   localhost: {
-    ...config.mysql.localhost,
+    ...config.mysql,
     name: "localhost",
     type: "mysql",
     synchronize: true,
@@ -25,7 +23,7 @@ export const mysqlConfig: MySQLConfigType = {
     }
   },
   development: {
-    ...config.mysql.development,
+    ...config.mysql,
     name: "development",
     type: "mysql",
     synchronize: true,
@@ -37,7 +35,7 @@ export const mysqlConfig: MySQLConfigType = {
     }
   },
   production: {
-    ...config.mysql.production,
+    ...config.mysql,
     name: "production",
     type: "mysql",
     synchronize: false,
@@ -55,8 +53,4 @@ export const mysqlConfig: MySQLConfigType = {
   },
 };
 
-export const redisConfig: RedisConfigType = {
-  localhost: config.redis.localhost,
-  development: config.redis.development,
-  production: config.redis.production,
-};
+export const redisConfig: RedisConfigType = config.redis;

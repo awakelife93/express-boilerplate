@@ -10,8 +10,10 @@ class AppRepository {
   private contents: Repository<Contents> | null = null;
 
   connect(): void {
-    this.user = getManager(config.NODE_ENV).getRepository(User);
-    this.contents = getManager(config.NODE_ENV).getRepository(Contents);
+    const manager = getManager(config.NODE_ENV);
+    
+    this.user = manager.getRepository(User);
+    this.contents = manager.getRepository(Contents);
   }
 
   get User(): Repository<User> {
