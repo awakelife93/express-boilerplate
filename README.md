@@ -2,7 +2,7 @@
 
 ## React Client + React Admin + Gateway Server + API Server + Style Server
 
-![구조](https://user-images.githubusercontent.com/20429356/158008003-23315066-bca4-402c-af4e-10d81a886ec7.png)
+![Architecture](https://user-images.githubusercontent.com/20429356/158008003-23315066-bca4-402c-af4e-10d81a886ec7.png)
 
 ## Client Repository
 
@@ -20,47 +20,31 @@ https://github.com/awakelife93/spring-boot-api-gateway
 
 https://github.com/awakelife93/express-design-system-boilerplate
 
-## [노트]
+## [Note]
 
-### 설명
-
-```
-[환경설정]
-.env를 사용한다.
-
-1. generate ./env file (dotenv)
-2. DB Table (Model) 관리
-    2-1. go .src/lib/database.ts
-    2-2. AppRepository 제어
-```
-
-## 작성자
+### Description
 
 ```
-2020.05.14 -> 2021.06.16
-Author: 박현우
+1. Controller / Model / Service Layer
+2. Common preprocessing and data checking is handled by middleware. (src/lib/middleware)
+3. This project did not create a separate Dto.
 ```
 
-## Framework & Library
+## Author
 
 ```
-Express
-TypeORM
-Mysql
-Redis
-JWT
-Module Alias
-Class Validator
-Class Transformer
+2020.05.14 -> 
+Author: Hyunwoo Park
 ```
 
-## 실행
+## Execute
 
 ```
 1. yarn install
-2. npm start
-  2-1. 현재 개발중으로 인해 nodemon을 붙인 상태이므로, package.json 수정해서 사용하길 요망
-3. 설명란 참고
+2. yarn start
+3. If you run it with docker-compose Please check each container environment.
+  3-1. docker-compose-app.yml = Create and run only nodejs(express) container
+  3-2. docker-compose-full-system.yml = Create and run each container for mysql, redis, and nodejs(express)
 ```
 
 #
