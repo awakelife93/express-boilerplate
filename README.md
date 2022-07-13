@@ -28,6 +28,7 @@ https://github.com/awakelife93/express-design-system-boilerplate
 1. Controller / Model / Service Layer
 2. Common preprocessing and data checking is handled by middleware. (src/lib/middleware)
 3. This project did not create a separate Dto.
+4. The default environment for build and code level is the localhost environment.
 ```
 
 ## Author
