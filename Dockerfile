@@ -3,12 +3,13 @@ WORKDIR /app
 COPY package*.json ./
 
 FROM base as production
-ENV NODE_ENV=production
-RUN npm ci --silent
+RUN yarn install --immutable --immutable-cache --check-cache
 COPY . .
 
 FROM base as development
+RUN yarn install --silent
+COPY . .
+
 FROM base as localhost
-ENV NODE_ENV=development
-RUN npm install --silent
+RUN yarn install --silent
 COPY . .
