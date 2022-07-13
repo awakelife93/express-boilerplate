@@ -8,7 +8,7 @@ services:
       - --collation-server=utf8mb4_unicode_ci
     volumes:
       - ./data/mysqldata:/var/lib/mysql
-      # If you need my.cnf file, here...
+      # if you need my.cnf file, here...
     environment:
       - MYSQL_ROOT_PASSWORD=${mysqlRootPassword}
       - MYSQL_DATABASE=${mysqlDataBase}
@@ -31,8 +31,8 @@ services:
   app:
     build:
       context: ./
-      # select target (localhost, development, production)
-      target: localhost
+      # select docker base (localhost, development, production) - default localhost
+      target: ${NODE_ENV:-localhost}
     environment:
       redisHost: redis
       redisPort: 6379
@@ -41,8 +41,8 @@ services:
       mysqlUserName: ${mysqlUserName}
       mysqlDataBase: ${mysqlDataBase}
       mysqlPassword: ${mysqlPassword}
-      # select env (localhost, development, production)
-      NODE_ENV: localhost
+      # select app envierment (localhost, development, production) - default localhost
+      NODE_ENV: ${NODE_ENV:-localhost}
     ports: 
       - "3000:3000"
     volumes:

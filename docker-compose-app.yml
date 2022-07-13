@@ -3,8 +3,8 @@ services:
   app:
     build:
       context: ./
-      # select target (localhost, development, production)
-      target: localhost
+      # select docker base (localhost, development, production) - default localhost
+      target: ${NODE_ENV:-localhost}
     environment:
       redisHost: ${redisHost} # default "127.0.0.1"
       redisPort: ${redisPort} # default 6379
@@ -13,8 +13,8 @@ services:
       mysqlUserName: ${mysqlUserName}
       mysqlDataBase: ${mysqlDataBase}
       mysqlPassword: ${mysqlPassword}
-      # select env (localhost, development, production)
-      NODE_ENV: localhost
+      # select app envierment (localhost, development, production) - default localhost
+      NODE_ENV: ${NODE_ENV:-localhost}
     ports: 
       - "3000:3000"
     volumes:
