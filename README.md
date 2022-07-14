@@ -44,8 +44,9 @@ Author: Hyunwoo Park
 1. yarn install
 2. yarn start
 3. If you run it with docker-compose Please check each container environment.
-  3-1. docker-compose-app.yml = Create and run only nodejs(express) container
-  3-2. docker-compose-full-system.yml = Create and run each container for mysql, redis, and nodejs(express)
+  3-1. docker-compose.app.yml = Create and run only nodejs(express) container.
+  3-2. docker-compose.full.system.yml = Create and run each container for mysql, redis, and nodejs(express)
+  3-3. Docker environment variables are managed and used in src/config.
 ```
 
 #
