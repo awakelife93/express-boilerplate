@@ -8,7 +8,7 @@ import { UserProfileType, UserRequestType } from "@/types/user";
 import { onFailureHandler } from "@/utils";
 import _ from "lodash";
 import { Like } from "typeorm";
-import { _signOut } from "./auth";
+import { signOut } from "./auth";
 
 export const findUserCount = async (
   conditions: Partial<UserRequestType>
@@ -105,7 +105,7 @@ export const tokenRemoveUser = async (
 ): CommonPromiseAPIResponseType<object> => {
   const payload: PayLoadItemType = getPayload(token);
   await removeUser({ userId: payload.userId });
-  return await _signOut(token);
+  return await signOut(token);
 };
 
 export const findUserProfile = async (
