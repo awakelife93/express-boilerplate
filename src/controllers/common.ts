@@ -1,9 +1,9 @@
 import { IRequest, IResponse } from "@/lib";
 import {
   CommonAPIResponseType,
-  CommonPromiseAPIResponseType,
+  CommonPromiseAPIResponseType
 } from "@/lib/type";
-import { _findDashboardCount, _health } from "@/services/common";
+import { findDashboardCount as _findDashboardCount, health as _health } from "@/services/common";
 import { HandlerParamsType } from "@/utils";
 
 export const health = (
