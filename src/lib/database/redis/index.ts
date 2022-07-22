@@ -1,4 +1,6 @@
 import config from "@/config";
+import { ErrorStatusMessage } from "@/lib/status";
+import _ from "lodash";
 import redis from "redis";
 import { promisify } from "util";
 import { redisConfig } from "../config";
@@ -10,13 +12,17 @@ import { redisConfig } from "../config";
 type ExpireModeType = "EX" | "PX";
 
 class Redis {
-  private readonly client: redis.RedisClient;
-
-  constructor() {
+  private client: redis.RedisClient | null = null;
+  
+  connectRedis(): void {
     this.client = redis.createClient(redisConfig);
   }
 
   get(key: string): Promise<string | null> {
+    if (_.isNull(this.client)) {
+      throw new Error(ErrorStatusMessage.IS_NULL_REDIS);
+    }
+    
     return promisify(this.client.get).bind(this.client)(key);
   }
 
@@ -26,10 +32,18 @@ class Redis {
     mode: ExpireModeType = "PX",
     time: number = config.jwtRefreshExpireMS
   ): void {
+    if (_.isNull(this.client)) {
+      throw new Error(ErrorStatusMessage.IS_NULL_REDIS);
+    }
+
     this.client.set(key, value, mode, time);
   }
 
   remove(key: string): void {
+    if (_.isNull(this.client)) {
+      throw new Error(ErrorStatusMessage.IS_NULL_REDIS);
+    }
+    
     this.client.del(key);
   }
 }

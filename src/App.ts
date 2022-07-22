@@ -1,4 +1,4 @@
-import { createExpress, generateTestData } from "@/lib";
+import { createExpress, generateTestData, Redis } from "@/lib";
 import AppRepository from "@/repository";
 import { Application } from "express";
 import _ from "lodash";
@@ -7,7 +7,7 @@ import {
   connectMysql,
   createRoute,
   createServer,
-  initializeSentry,
+  initializeSentry
 } from "./lib";
 import { generateConfigLog } from "./utils";
 
@@ -32,6 +32,7 @@ class App {
   private async onConnectDB(): Promise<void> {
     console.log("App Connected DB");
     await connectMysql();
+    await Redis.connectRedis();
   }
 
   private async onConnectRepository(): Promise<void> {
