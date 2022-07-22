@@ -2,7 +2,7 @@ import {
   CommonStatusCode,
   initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse,
+  IResponse
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
@@ -30,6 +30,7 @@ export default (app: Application): void => {
               item: result,
             });
           } else {
+            response.status(result.status ?? CommonStatusCode.OK);
             response.send({
               item: result,
             });
