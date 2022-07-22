@@ -18,7 +18,7 @@ class AppRepository {
 
   get User(): Repository<User> {
     if (_.isNull(this.user)) {
-      throw new Error(`User ${ErrorStatusMessage.IS_EMPTY_REPOSITORY}`);
+      throw new Error(`User ${ErrorStatusMessage.IS_NULL_REPOSITORY}`);
     }
 
     return this.user;
@@ -26,7 +26,7 @@ class AppRepository {
 
   get Contents(): Repository<Contents> {
     if (_.isNull(this.contents)) {
-      throw new Error(`Contents ${ErrorStatusMessage.IS_EMPTY_REPOSITORY}`);
+      throw new Error(`Contents ${ErrorStatusMessage.IS_NULL_REPOSITORY}`);
     }
 
     return this.contents;

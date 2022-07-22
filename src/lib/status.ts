@@ -22,5 +22,6 @@ export enum CommonStatusMessage {
 
 export enum ErrorStatusMessage {
   GENERATE_REFRESH_TOKEN_KEY_FAIL = "generateRefreshTokenKey Failed - Empty Email",
-  IS_EMPTY_REPOSITORY = "Repository is Empty",
+  IS_NULL_REDIS = "Redis Object is null",
+  IS_NULL_REPOSITORY = "Repository Object is null",
 }
