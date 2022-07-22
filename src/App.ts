@@ -72,14 +72,14 @@ class App {
     };
 
     const application = applications[config.NODE_ENV];
-
-    if (_.isFunction(application)) {
-      return application;
-    } else {
+    
+    if (_.isUndefined(application)) {
       console.log(`NODE_ENV is Undefined!!! start localhost mode`);
       config.NODE_ENV = "localhost";
       return this.onCreateLocalHostApp;
     }
+
+    return application;
   }
 
   async startApplication(): Promise<void> {
