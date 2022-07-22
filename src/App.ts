@@ -32,7 +32,7 @@ class App {
   private async onConnectDB(): Promise<void> {
     console.log("App Connected DB");
     await connectMysql();
-    await Redis.connectRedis();
+    await Redis.connect();
   }
 
   private async onConnectRepository(): Promise<void> {

@@ -14,7 +14,7 @@ type ExpireModeType = "EX" | "PX";
 class Redis {
   private client: redis.RedisClient | null = null;
   
-  connectRedis(): void {
+  connect(): void {
     this.client = redis.createClient(redisConfig);
   }
 
