@@ -13,7 +13,7 @@ type ExpireModeType = "EX" | "PX";
 
 class Redis {
   private client: redis.RedisClient | null = null;
-  
+
   connect(): void {
     this.client = redis.createClient(redisConfig);
   }
@@ -22,7 +22,7 @@ class Redis {
     if (_.isNull(this.client)) {
       throw new Error(ErrorStatusMessage.IS_NULL_REDIS);
     }
-    
+
     return promisify(this.client.get).bind(this.client)(key);
   }
 
@@ -43,7 +43,7 @@ class Redis {
     if (_.isNull(this.client)) {
       throw new Error(ErrorStatusMessage.IS_NULL_REDIS);
     }
-    
+
     this.client.del(key);
   }
 }

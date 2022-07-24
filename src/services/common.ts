@@ -1,14 +1,14 @@
 import { CommonStatusCode } from "@/lib";
 import {
   CommonAPIResponseType,
-  CommonPromiseAPIResponseType
+  CommonPromiseAPIResponseType,
 } from "@/lib/type";
 import { UserRole } from "@/types/user";
 import {
   HandlerParamsType,
   healthCheckMemory,
   nowMemoryPercent,
-  onFailureHandler
+  onFailureHandler,
 } from "@/utils";
 import { findContentsCount } from "./contents";
 import { findUserCount } from "./user";

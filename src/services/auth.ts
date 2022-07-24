@@ -4,7 +4,7 @@ import {
   CommonStatusMessage,
   createToken,
   getPayload,
-  Redis
+  Redis,
 } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
@@ -14,7 +14,7 @@ import {
   compareSync,
   findPassword,
   generateRefreshTokenKey,
-  onFailureHandler
+  onFailureHandler,
 } from "@/utils";
 import _ from "lodash";
 import { findOneUser } from "./user";

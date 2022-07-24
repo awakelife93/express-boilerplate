@@ -2,7 +2,7 @@ import {
   CommonStatusCode,
   initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse
+  IResponse,
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
