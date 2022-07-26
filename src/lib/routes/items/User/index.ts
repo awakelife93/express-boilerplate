@@ -6,7 +6,7 @@ import {
   findProfile,
   remove,
   tokenRemove,
-  update
+  update,
 } from "@/controllers/user";
 import { User } from "@/entities/User";
 import { RouteItemType } from "@/lib/routes/items";

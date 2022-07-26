@@ -9,7 +9,7 @@ import {
   findUserProfile,
   removeUser,
   tokenRemoveUser,
-  updateUser
+  updateUser,
 } from "@/services/user";
 import { UserProfileType, UserRequestType } from "@/types/user";
 
