@@ -1,6 +1,6 @@
+import { User } from "@/entities/User";
 import { IRequest, IResponse } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { User } from "@/models/User";
 import {
   createUser,
   findOneUser,
@@ -9,7 +9,7 @@ import {
   findUserProfile,
   removeUser,
   tokenRemoveUser,
-  updateUser,
+  updateUser
 } from "@/services/user";
 import { UserProfileType, UserRequestType } from "@/types/user";
 

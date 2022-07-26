@@ -1,7 +1,7 @@
 import config from "@/config";
+import { Contents } from "@/entities/Contents";
+import { User } from "@/entities/User";
 import { ErrorStatusMessage } from "@/lib/status";
-import { Contents } from "@/models/Contents";
-import { User } from "@/models/User";
 import _ from "lodash";
 import { getManager, Repository } from "typeorm";
 

@@ -1,7 +1,7 @@
+import { User } from "@/entities/User";
 import { CommonStatusCode, CommonStatusMessage, getPayload } from "@/lib";
 import { PayLoadItemType } from "@/lib/middleware/jwt";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { User } from "@/models/User";
 import AppRepository from "@/repository";
 import { QueryType } from "@/types/common";
 import { UserProfileType, UserRequestType } from "@/types/user";

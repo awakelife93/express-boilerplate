@@ -1,13 +1,13 @@
+import { Contents } from "@/entities/Contents";
 import { IRequest, IResponse } from "@/lib";
 import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { Contents } from "@/models/Contents";
 import {
   createContents,
   findContents,
   findContentsCount,
   findOneContents,
   removeContents,
-  updateContents,
+  updateContents
 } from "@/services/contents";
 import { ContentsRequestType } from "@/types/contents";
 

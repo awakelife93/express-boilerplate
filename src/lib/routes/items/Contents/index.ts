@@ -4,10 +4,10 @@ import {
   findCount,
   findOne,
   remove,
-  update,
+  update
 } from "@/controllers/contents";
+import { Contents } from "@/entities/Contents";
 import { RouteItemType } from "@/lib/routes/items";
-import { Contents } from "@/models/Contents";
 
 const rootPath = "/contents";
 const ContentsRoute: RouteItemType[] = [

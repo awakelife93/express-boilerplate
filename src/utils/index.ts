@@ -17,9 +17,9 @@ export const generateRefreshTokenKey = (email: string): string => {
 export const nowMemoryPercent = (): number => {
   const totalmem = os.totalmem();
   const freemem = os.freemem();
-  const memPercent = (freemem / totalmem) * 100;
+  const memoryPercent = (freemem / totalmem) * 100;
 
-  return memPercent;
+  return memoryPercent;
 };
 
 export const healthCheckMemory = (): boolean => {
@@ -31,7 +31,7 @@ export const generateConfigLog = (): void => {
   console.log("==================================");
   console.log("*");
   console.log(
-    `* start time: ${new Date().toLocaleDateString(config.timezone, {
+    `* start time: ${new Date().toLocaleDateString("ko", {
       year: "numeric",
       month: "numeric",
       day: "numeric",

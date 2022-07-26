@@ -25,7 +25,7 @@ const validate = async (
   } catch (error: unknown) {
     const _error = error as ValidationError;
 
-    console.log(`validate error entity model ${entity.name} ${_error}`);
+    console.log(`validate error entity ${entity.name} ${_error}`);
     onFailureHandler({
       status: CommonStatusCode.BAD_REQUEST,
       message: _error.toString() || CommonStatusMessage.BAD_REQUEST,

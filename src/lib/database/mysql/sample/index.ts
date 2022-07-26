@@ -1,5 +1,5 @@
-import { Contents } from "@/models/Contents";
-import { User } from "@/models/User";
+import { Contents } from "@/entities/Contents";
+import { User } from "@/entities/User";
 import AppRepository from "@/repository";
 import { ContentParamsType } from "@/types/contents";
 import { UserParamsType, UserRole } from "@/types/user";
