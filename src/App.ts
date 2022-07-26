@@ -7,7 +7,7 @@ import {
   connectMysql,
   createRoute,
   createServer,
-  initializeSentry,
+  initializeSentry
 } from "./lib";
 import { generateConfigLog } from "./utils";
 
@@ -75,7 +75,6 @@ class App {
 
     if (_.isUndefined(application)) {
       console.log(`NODE_ENV is Undefined!!! start localhost mode`);
-      config.NODE_ENV = "localhost";
       return this.onCreateLocalHostApp;
     }
 
@@ -84,9 +83,9 @@ class App {
 
   async startApplication(): Promise<void> {
     try {
-      generateConfigLog();
       const application = this.getApplication();
       await application();
+      generateConfigLog();
     } catch (error: unknown) {
       console.log(error);
     }
