@@ -1,27 +1,27 @@
 import config from "@/config";
 import { User } from "@/entities/User";
 import {
+  CommonPromiseAPIResponse,
   CommonStatusCode,
   CommonStatusMessage,
   createToken,
   getPayload,
-  Redis,
+  PayLoadItem,
+  Redis
 } from "@/lib";
-import { PayLoadItemType } from "@/lib/middleware/jwt";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
-import { AuthRequestType, AuthResponseType } from "@/types/auth";
+import { AuthRequest, AuthResponse } from "@/types/auth";
 import {
   compareSync,
   findPassword,
   generateRefreshTokenKey,
-  onFailureHandler,
+  onFailureHandler
 } from "@/utils";
 import _ from "lodash";
 import { findOneUser } from "./user";
 
 export const signIn = async (
-  conditions: AuthRequestType
-): CommonPromiseAPIResponseType<AuthResponseType> => {
+  conditions: AuthRequest
+): CommonPromiseAPIResponse<AuthResponse> => {
   const user = (await findOneUser({
     email: conditions.email,
   })) as User;
@@ -73,8 +73,8 @@ export const signIn = async (
 
 export const signOut = async (
   token: string
-): CommonPromiseAPIResponseType<object> => {
-  const payload: PayLoadItemType = getPayload(token);
+): CommonPromiseAPIResponse<object> => {
+  const payload: PayLoadItem = getPayload(token);
   Redis.remove(generateRefreshTokenKey(payload.email));
   return {};
 };

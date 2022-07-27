@@ -1,19 +1,15 @@
-import { CommonStatusCode } from "@/lib";
-import {
-  CommonAPIResponseType,
-  CommonPromiseAPIResponseType,
-} from "@/lib/type";
+import { CommonAPIResponse, CommonPromiseAPIResponse, CommonStatusCode } from "@/lib";
 import { UserRole } from "@/types/user";
 import {
-  HandlerParamsType,
+  HandlerParams,
   healthCheckMemory,
   nowMemoryPercent,
-  onFailureHandler,
+  onFailureHandler
 } from "@/utils";
 import { findContentsCount } from "./contents";
 import { findUserCount } from "./user";
 
-export const health = (): CommonAPIResponseType<HandlerParamsType> => {
+export const health = (): CommonAPIResponse<HandlerParams> => {
   if (healthCheckMemory()) {
     onFailureHandler({
       status: CommonStatusCode.INTERNAL_SERVER_ERROR,
@@ -28,7 +24,7 @@ export const health = (): CommonAPIResponseType<HandlerParamsType> => {
 };
 
 export const findDashboardCount =
-  async (): CommonPromiseAPIResponseType<object> => {
+  async (): CommonPromiseAPIResponse<object> => {
     return {
       usersCount: {
         total: await findUserCount({}),

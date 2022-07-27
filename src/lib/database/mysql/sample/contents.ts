@@ -1,6 +1,6 @@
-import { ContentParamsType } from "@/types/contents";
+import { ContentParams } from "@/types/contents";
 
-export const sampleContents: ContentParamsType[] = [
+export const sampleContents: ContentParams[] = [
   {
     imageLink: "/assets/images/free_image1.png",
     title: "제목",

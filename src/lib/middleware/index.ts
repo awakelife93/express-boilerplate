@@ -4,14 +4,14 @@ import cors from "cors";
 import express, { NextFunction, Request, Response } from "express";
 import helmet from "helmet";
 import path from "path";
-import { RouteItemType } from "../routes/items";
+import { RouteItem } from "../routes/items";
 import { createToken, getPayload, validateToken } from "./jwt";
 import generateRequest from "./request";
 import generateResponse from "./response";
 import Sentry from "./sentry";
 import { validateEntity } from "./validateEntity";
 
-type ClientRequestItemType = {
+type ClientRequestItem = {
   /**
    * Header의 토큰을 꺼내기 쉽게 정제한다.
    */
@@ -23,7 +23,7 @@ type ClientRequestItemType = {
   item: unknown;
 };
 
-interface IRequest extends Request, Partial<ClientRequestItemType> {}
+interface IRequest extends Request, Partial<ClientRequestItem> {}
 
 interface IResponse extends Response {}
 
@@ -31,7 +31,7 @@ const initializeRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
   next: NextFunction,
-  routeItem: RouteItemType
+  routeItem: RouteItem
 ): Promise<void> => {
   try {
     if (config.NODE_ENV === "localhost") {
@@ -60,7 +60,7 @@ const initializeRouteLevelMiddleWare = async (
 const initializeLocalHostRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
-  routeItem: RouteItemType
+  routeItem: RouteItem
 ): Promise<void> => {
   await generateRequest(request);
   await generateResponse(response);
@@ -70,7 +70,7 @@ const initializeLocalHostRouteLevelMiddleWare = async (
 const initializeProductionRouteLevelMiddleWare = async (
   request: IRequest,
   response: IResponse,
-  routeItem: RouteItemType
+  routeItem: RouteItem
 ): Promise<void> => {
   await generateRequest(request);
   await generateResponse(response);

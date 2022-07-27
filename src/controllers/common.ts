@@ -1,24 +1,21 @@
-import { IRequest, IResponse } from "@/lib";
-import {
-  CommonAPIResponseType,
-  CommonPromiseAPIResponseType,
-} from "@/lib/type";
+import { CommonAPIResponse, CommonPromiseAPIResponse, IRequest, IResponse } from "@/lib";
+
 import {
   findDashboardCount as _findDashboardCount,
-  health as _health,
+  health as _health
 } from "@/services/common";
-import { HandlerParamsType } from "@/utils";
+import { HandlerParams } from "@/utils";
 
 export const health = (
   request: IRequest,
   response: IResponse
-): CommonAPIResponseType<HandlerParamsType> => {
+): CommonAPIResponse<HandlerParams> => {
   return _health();
 };
 
 export const findDashboardCount = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   return await _findDashboardCount();
 };

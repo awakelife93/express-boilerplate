@@ -6,13 +6,13 @@ import {
   findProfile,
   remove,
   tokenRemove,
-  update,
+  update
 } from "@/controllers/user";
 import { User } from "@/entities/User";
-import { RouteItemType } from "@/lib/routes/items";
+import { RouteItem } from "..";
 
 const rootPath = "/users";
-const UserRoute: RouteItemType[] = [
+const UserRoute: RouteItem[] = [
   {
     path: `${rootPath}/count`,
     method: "get",

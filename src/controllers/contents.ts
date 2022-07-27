@@ -1,44 +1,43 @@
 import { Contents } from "@/entities/Contents";
-import { IRequest, IResponse } from "@/lib";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
+import { CommonPromiseAPIResponse, IRequest, IResponse } from "@/lib";
 import {
   createContents,
   findContents,
   findContentsCount,
   findOneContents,
   removeContents,
-  updateContents,
+  updateContents
 } from "@/services/contents";
-import { ContentsRequestType } from "@/types/contents";
+import { ContentsRequest } from "@/types/contents";
 
 export const findCount = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<number> => {
-  const conditions = request.item as ContentsRequestType;
+): CommonPromiseAPIResponse<number> => {
+  const conditions = request.item as ContentsRequest;
   return await findContentsCount(conditions);
 };
 
 export const findOne = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<Contents> => {
-  const conditions = request.item as ContentsRequestType;
+): CommonPromiseAPIResponse<Contents> => {
+  const conditions = request.item as ContentsRequest;
   return await findOneContents(conditions);
 };
 
 export const find = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<[Contents[], number]> => {
-  const conditions = request.item as ContentsRequestType;
+): CommonPromiseAPIResponse<[Contents[], number]> => {
+  const conditions = request.item as ContentsRequest;
   return await findContents(conditions);
 };
 
 export const create = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<Contents> => {
+): CommonPromiseAPIResponse<Contents> => {
   const conditions = request.item as Contents;
   return await createContents(conditions);
 };
@@ -46,7 +45,7 @@ export const create = async (
 export const update = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<Contents> => {
+): CommonPromiseAPIResponse<Contents> => {
   const conditions = request.item as Contents;
   return await updateContents(conditions);
 };
@@ -54,7 +53,7 @@ export const update = async (
 export const remove = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   const conditions = request.item as Contents;
   return await removeContents(conditions);
 };

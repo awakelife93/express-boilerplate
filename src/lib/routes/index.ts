@@ -2,15 +2,15 @@ import {
   CommonStatusCode,
   initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse,
+  IResponse
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
 import _ from "lodash";
-import RouteItems, { RouteItemType } from "./items";
+import RouteItems, { RouteItem } from "./items";
 
-export default (app: Application): void => {
-  RouteItems.forEach((item: RouteItemType) => {
+const createRoute = (app: Application): void => {
+  RouteItems.forEach((item: RouteItem) => {
     app[item.method](
       item.path,
       (request: IRequest, response: IResponse, next: NextFunction) =>
@@ -46,3 +46,5 @@ export default (app: Application): void => {
     );
   });
 };
+
+export default createRoute;

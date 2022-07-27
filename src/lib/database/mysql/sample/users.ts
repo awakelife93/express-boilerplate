@@ -1,6 +1,6 @@
-import { UserParamsType } from "@/types/user";
+import { UserParams } from "@/types/user";
 
-export const sampleUsers: UserParamsType[] = [
+export const sampleUsers: UserParams[] = [
   {
     email: "awakelife93@gmail.com",
     password: "123",

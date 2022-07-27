@@ -1,6 +1,8 @@
 import express from "express";
 import { initializeMiddleWare } from "./middleware";
 
-export default (): express.Application => {
+const createExpress = (): express.Application => {
   return initializeMiddleWare(express());
 };
+
+export default createExpress;

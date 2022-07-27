@@ -1,16 +1,16 @@
 import { Contents } from "@/entities/Contents";
-import { CommonRequestType, SortType } from "./common";
+import { CommonRequest, Sort } from "./common";
 
-type ContentsRequestSubOptionType = {
-  titleSort: SortType;
-  subTitleSort: SortType;
+type ContentsRequestSubOption = {
+  titleSort: Sort;
+  subTitleSort: Sort;
 };
 
-export type ContentsRequestType = ContentsRequestSubOptionType &
-  CommonRequestType &
+export type ContentsRequest = ContentsRequestSubOption &
+  CommonRequest &
   Contents;
 
-export type ContentParamsType = Omit<
+export type ContentParams = Omit<
   Contents,
   "contentId" | "createdDt" | "updatedDt" | "deletedDt"
 >;

@@ -1,11 +1,6 @@
 import { IRequest } from "@/lib";
 import _ from "lodash";
 
-export default async (request: IRequest): Promise<void> => {
-  await createToken(request);
-  await createItem(request);
-};
-
 const createToken = (request: IRequest): void => {
   if (!_.isUndefined(request.headers.authorization)) {
     request.token = request.headers.authorization.replace("Bearer ", "");
@@ -25,3 +20,10 @@ const createItem = async (request: IRequest): Promise<void> => {
       break;
   }
 };
+
+const generateRequest = async (request: IRequest): Promise<void> => {
+  await createToken(request);
+  await createItem(request);
+};
+
+export default generateRequest;

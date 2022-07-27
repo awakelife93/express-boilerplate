@@ -1,8 +1,8 @@
 import { signIn, signOut } from "@/controllers/auth";
-import { RouteItemType } from "@/lib/routes/items";
+import { RouteItem } from "..";
 
 const rootPath = "/auth";
-const AuthRoute: RouteItemType[] = [
+const AuthRoute: RouteItem[] = [
   {
     path: `${rootPath}/signIn`,
     method: "post",

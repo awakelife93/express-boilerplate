@@ -1,14 +1,14 @@
 import { Contents } from "@/entities/Contents";
 import { User } from "@/entities/User";
 import AppRepository from "@/repository";
-import { ContentParamsType } from "@/types/contents";
-import { UserParamsType, UserRole } from "@/types/user";
+import { ContentParams } from "@/types/contents";
+import { UserParams, UserRole } from "@/types/user";
 import { sampleContents } from "./contents";
 import { sampleUsers } from "./users";
 
 const generateTestData = async (): Promise<void> => {
   const generateContentsTable = (): void => {
-    sampleContents.forEach((item: ContentParamsType, index: number) => {
+    sampleContents.forEach((item: ContentParams, index: number) => {
       const contents = new Contents();
 
       contents.title = item.title + index;
@@ -21,7 +21,7 @@ const generateTestData = async (): Promise<void> => {
   };
 
   const generateUserTable = (): void => {
-    sampleUsers.forEach((item: UserParamsType, index: number) => {
+    sampleUsers.forEach((item: UserParams, index: number) => {
       const user = new User();
 
       user.email = item.email + index;

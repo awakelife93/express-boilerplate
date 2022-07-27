@@ -4,11 +4,11 @@ import { validateOrReject, ValidationError } from "class-validator";
 import _ from "lodash";
 import { IRequest } from ".";
 import { CommonStatusCode, CommonStatusMessage, UnknownObject } from "..";
-import { RouteItemType } from "../routes/items";
+import { RouteItem } from "../routes/items";
 
 export const validateEntity = async (
   request: IRequest,
-  routeItem: RouteItemType
+  routeItem: RouteItem
 ): Promise<void> => {
   if (routeItem.isValidate && !_.isUndefined(routeItem.entity)) {
     await validate(routeItem.entity, request.body);

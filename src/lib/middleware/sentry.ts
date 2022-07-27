@@ -1,6 +1,6 @@
 import config from "@/config";
-import Sentry from "@sentry/node";
-import Tracing from "@sentry/tracing";
+import * as Sentry from "@sentry/node";
+import * as Tracing from "@sentry/tracing";
 import { Application } from "express";
 
 export const initializeSentry = (app: Application): void => {

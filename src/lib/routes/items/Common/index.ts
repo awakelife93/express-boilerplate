@@ -1,7 +1,7 @@
 import { findDashboardCount, health } from "@/controllers/common";
-import { RouteItemType } from "@/lib/routes/items";
+import { RouteItem } from "..";
 
-const CommonRoute: RouteItemType[] = [
+const CommonRoute: RouteItem[] = [
   {
     path: "/clientHealth",
     method: "get",

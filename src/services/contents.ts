@@ -1,15 +1,15 @@
 import { Contents } from "@/entities/Contents";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
+import { CommonPromiseAPIResponse } from "@/lib";
 import AppRepository from "@/repository";
-import { QueryType } from "@/types/common";
-import { ContentsRequestType } from "@/types/contents";
+import { Query } from "@/types/common";
+import { ContentsRequest } from "@/types/contents";
 import _ from "lodash";
 import { Like } from "typeorm";
 
 export const findContentsCount = async (
-  conditions: Partial<ContentsRequestType>
-): CommonPromiseAPIResponseType<number> => {
-  let query = {} as Partial<QueryType>;
+  conditions: Partial<ContentsRequest>
+): CommonPromiseAPIResponse<number> => {
+  let query = {} as Partial<Query>;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query = {
@@ -28,15 +28,15 @@ export const findContentsCount = async (
 };
 
 export const findOneContents = async (
-  conditions: Partial<ContentsRequestType>
-): CommonPromiseAPIResponseType<Contents> => {
+  conditions: Partial<ContentsRequest>
+): CommonPromiseAPIResponse<Contents> => {
   return await AppRepository.Contents.findOne({ ...conditions });
 };
 
 export const findContents = async (
-  conditions: Partial<ContentsRequestType>
-): CommonPromiseAPIResponseType<[Contents[], number]> => {
-  let query = {} as QueryType;
+  conditions: Partial<ContentsRequest>
+): CommonPromiseAPIResponse<[Contents[], number]> => {
+  let query = {} as Query;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query.where = [
@@ -65,14 +65,14 @@ export const findContents = async (
 
 export const createContents = async (
   conditions: Contents
-): CommonPromiseAPIResponseType<Contents> => {
+): CommonPromiseAPIResponse<Contents> => {
   const contents: Contents = await AppRepository.Contents.create(conditions);
   return AppRepository.Contents.save(contents);
 };
 
 export const updateContents = async (
   conditions: Partial<Contents>
-): CommonPromiseAPIResponseType<Contents> => {
+): CommonPromiseAPIResponse<Contents> => {
   await AppRepository.Contents.update(
     { contentId: conditions.contentId },
     conditions
@@ -82,7 +82,7 @@ export const updateContents = async (
 
 export const removeContents = async (
   conditions: Partial<Contents>
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   await AppRepository.Contents.softDelete({ contentId: conditions.contentId });
   return {};
 };

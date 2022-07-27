@@ -1,5 +1,5 @@
 import config from "@/config";
-import { ErrorStatusMessage } from "@/lib/status";
+import { ErrorStatusMessage } from "@/lib";
 import _ from "lodash";
 import redis from "redis";
 import { promisify } from "util";
@@ -9,7 +9,7 @@ import { redisConfig } from "../config";
  * EX: s
  * PX: ms
  */
-type ExpireModeType = "EX" | "PX";
+type ExpireMode = "EX" | "PX";
 
 class Redis {
   private client: redis.RedisClient | null = null;
@@ -29,7 +29,7 @@ class Redis {
   set(
     key: string,
     value: string,
-    mode: ExpireModeType = "PX",
+    mode: ExpireMode = "PX",
     time: number = config.jwtRefreshExpireMS
   ): void {
     if (_.isNull(this.client)) {

@@ -1,15 +1,15 @@
 import config from "@/config";
-import { NodeEnvType } from "@/lib/type";
+import { NodeEnvironment } from "@/lib";
 import { ClientOpts } from "redis";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-export type MySQLConfigType = {
-  [env in NodeEnvType]: MysqlConnectionOptions;
+export type MySQLConfig = {
+  [env in NodeEnvironment]: MysqlConnectionOptions;
 };
 
-export type RedisConfigType = ClientOpts;
+export type RedisConfig = ClientOpts;
 
-export const mysqlConfig: MySQLConfigType = {
+export const mysqlConfig: MySQLConfig = {
   localhost: {
     ...config.mysql,
     name: "localhost",
@@ -50,4 +50,4 @@ export const mysqlConfig: MySQLConfigType = {
   },
 };
 
-export const redisConfig: RedisConfigType = config.redis;
+export const redisConfig: RedisConfig = config.redis;

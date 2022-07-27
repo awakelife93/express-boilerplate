@@ -1,15 +1,17 @@
-import { createExpress, generateTestData, Redis } from "@/lib";
-import AppRepository from "@/repository";
-import { Application } from "express";
-import _ from "lodash";
-import config from "./config";
+import config from "@/config";
 import {
   connectMysql,
+  createExpress,
   createRoute,
   createServer,
+  generateTestData,
   initializeSentry,
-} from "./lib";
-import { generateConfigLog } from "./utils";
+  Redis
+} from "@/lib";
+import AppRepository from "@/repository";
+import { generateConfigLog } from "@/utils";
+import { Application } from "express";
+import _ from "lodash";
 
 class App {
   private readonly server: Application = createExpress();

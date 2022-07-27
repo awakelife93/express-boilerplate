@@ -1,21 +1,21 @@
 import { User } from "@/entities/User";
-import { CommonRequestType, SortType } from "./common";
+import { CommonRequest, Sort } from "./common";
 
-type UserRequestSubOptionType = {
-  emailSort: SortType;
-  nameSort: SortType;
+type UserRequestSubOption = {
+  emailSort: Sort;
+  nameSort: Sort;
 };
 
-export type UserRequestType = UserRequestSubOptionType &
-  CommonRequestType &
+export type UserRequest = UserRequestSubOption &
+  CommonRequest &
   User;
 
-export type UserParamsType = Omit<
+export type UserParams = Omit<
   User,
   "userId" | "role" | "createdDt" | "updatedDt" | "deletedDt"
 >;
 
-export type UserProfileType = {
+export type UserProfile = {
   userId: number;
   email: string;
   name: string;

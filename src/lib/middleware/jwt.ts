@@ -4,22 +4,22 @@ import { generateRefreshTokenKey } from "@/utils";
 import jwt from "jsonwebtoken";
 import _ from "lodash";
 
-export type PayLoadItemType = {
+export type PayLoadItem = {
   userId: number;
   email: string;
 };
 
-export type CreateTokenParamsType = {
+export type CreateTokenParams = {
   jwtExpireMS?: number;
-} & PayLoadItemType;
+} & PayLoadItem;
 
-export type TokenPayLoadType = jwt.JwtPayload & Partial<PayLoadItemType>;
+export type TokenPayLoad = jwt.JwtPayload & Partial<PayLoadItem>;
 
 export const createToken = ({
   userId,
   email,
   jwtExpireMS,
-}: CreateTokenParamsType): string => {
+}: CreateTokenParams): string => {
   return jwt.sign(
     {
       userId,
@@ -30,11 +30,11 @@ export const createToken = ({
   );
 };
 
-export const getTokenPayload = (token: string): TokenPayLoadType => {
+export const getTokenPayload = (token: string): TokenPayLoad => {
   return {
     ...(jwt.verify(token, config.jwtSecret, {
       ignoreExpiration: true,
-    }) as TokenPayLoadType),
+    }) as TokenPayLoad),
   };
 };
 
@@ -47,7 +47,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
      */
     try {
       const now = new Date().getTime() / 1000;
-      const jwtPayload: TokenPayLoadType = getTokenPayload(token);
+      const jwtPayload: TokenPayLoad = getTokenPayload(token);
 
       if (_.isUndefined(jwtPayload.exp)) {
         console.log(`===========> token exp is undefined ${token}`);
@@ -81,7 +81,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
           };
         }
 
-        const refreshTokenPayload: TokenPayLoadType = getTokenPayload(
+        const refreshTokenPayload: TokenPayLoad = getTokenPayload(
           refreshToken as string
         );
 
@@ -140,8 +140,8 @@ export const validateToken = async (request: IRequest): Promise<void> => {
   }
 };
 
-export const getPayload = (token: string): PayLoadItemType => {
-  const payload: TokenPayLoadType = getTokenPayload(token);
+export const getPayload = (token: string): PayLoadItem => {
+  const payload: TokenPayLoad = getTokenPayload(token);
 
   if (_.isUndefined(payload.userId) || _.isUndefined(payload.email)) {
     console.log(`===========> token payload item is undefined ${token}`);

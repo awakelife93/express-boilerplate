@@ -1,6 +1,5 @@
 import { User } from "@/entities/User";
-import { IRequest, IResponse } from "@/lib";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
+import { CommonPromiseAPIResponse, IRequest, IResponse } from "@/lib";
 import {
   createUser,
   findOneUser,
@@ -9,38 +8,38 @@ import {
   findUserProfile,
   removeUser,
   tokenRemoveUser,
-  updateUser,
+  updateUser
 } from "@/services/user";
-import { UserProfileType, UserRequestType } from "@/types/user";
+import { UserProfile, UserRequest } from "@/types/user";
 
 export const findOne = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<User> => {
-  const conditions = request.item as UserRequestType;
+): CommonPromiseAPIResponse<User> => {
+  const conditions = request.item as UserRequest;
   return await findOneUser(conditions);
 };
 
 export const find = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<[User[], number]> => {
-  const conditions = request.item as UserRequestType;
+): CommonPromiseAPIResponse<[User[], number]> => {
+  const conditions = request.item as UserRequest;
   return await findUser(conditions);
 };
 
 export const findCount = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<number> => {
-  const conditions = request.item as UserRequestType;
+): CommonPromiseAPIResponse<number> => {
+  const conditions = request.item as UserRequest;
   return await findUserCount(conditions);
 };
 
 export const findProfile = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<UserProfileType> => {
+): CommonPromiseAPIResponse<UserProfile> => {
   const token = request.token ?? "";
   return await findUserProfile(token);
 };
@@ -48,7 +47,7 @@ export const findProfile = async (
 export const create = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<User> => {
+): CommonPromiseAPIResponse<User> => {
   const conditions = request.item as User;
   return await createUser(conditions);
 };
@@ -56,7 +55,7 @@ export const create = async (
 export const update = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<User> => {
+): CommonPromiseAPIResponse<User> => {
   const conditions = request.item as User;
   return await updateUser(conditions);
 };
@@ -64,7 +63,7 @@ export const update = async (
 export const remove = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   const conditions = request.item as User;
   return await removeUser(conditions);
 };
@@ -72,7 +71,7 @@ export const remove = async (
 export const tokenRemove = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   const token: string = request.token ?? "";
   return await tokenRemoveUser(token);
 };

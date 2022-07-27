@@ -1,17 +1,17 @@
 import { FindOperator } from "typeorm";
 
-export type CommonRequestType = {
+export type CommonRequest = {
   searchKeyword: string;
 };
 
-export type SortType = "ASC" | "DESC";
+export type Sort = "ASC" | "DESC";
 
-export type QueryType = {
+export type Query = {
   where: {
     // search
     [index: string]: FindOperator<string> | string | boolean;
   }[];
   order: {
-    [index: string]: SortType;
+    [index: string]: Sort;
   };
 };

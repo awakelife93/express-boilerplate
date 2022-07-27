@@ -4,7 +4,7 @@ import CommonRoute from "./Common";
 import ContentsRoute from "./Contents";
 import UserRoute from "./User";
 
-export type RouteItemType = {
+export type RouteItem = {
   path: string;
   method: "get" | "post" | "put" | "delete" | "patch";
   next: Function;
@@ -12,7 +12,7 @@ export type RouteItemType = {
   entity?: ClassConstructor<object>;
 };
 
-const item: RouteItemType[] = [
+const item: RouteItem[] = [
   ...CommonRoute,
   ...AuthRoute,
   ...UserRoute,

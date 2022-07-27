@@ -1,20 +1,19 @@
-import { IRequest, IResponse } from "@/lib";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
+import { CommonPromiseAPIResponse, IRequest, IResponse } from "@/lib";
 import { signIn as _signIn, signOut as _signOut } from "@/services/auth";
-import { AuthRequestType, AuthResponseType } from "@/types/auth";
+import { AuthRequest, AuthResponse } from "@/types/auth";
 
 export const signIn = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<AuthResponseType> => {
-  const conditions = request.item as AuthRequestType;
+): CommonPromiseAPIResponse<AuthResponse> => {
+  const conditions = request.item as AuthRequest;
   return await _signIn(conditions);
 };
 
 export const signOut = async (
   request: IRequest,
   response: IResponse
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   const conditions: string = request.token ?? "";
   return await _signOut(conditions);
 };

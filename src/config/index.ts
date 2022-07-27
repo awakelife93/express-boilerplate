@@ -1,27 +1,26 @@
-import { RedisConfigType } from "@/lib/database/config";
-import { NodeEnvType } from "@/lib/type";
+import { NodeEnvironment, RedisConfig } from "@/lib";
 import "dotenv/config";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
-type MySQLCustomConfigType = Pick<
+type MySQLCustomConfig = Pick<
   MysqlConnectionOptions,
   "port" | "host" | "username" | "database" | "password" | "type"
 >;
 
-export type ConfigType = {
-  NODE_ENV: NodeEnvType;
+export type Config = {
+  NODE_ENV: NodeEnvironment;
   sentryDSN?: string;
   port: string | number;
-  redis: RedisConfigType;
-  mysql: MySQLCustomConfigType;
+  redis: RedisConfig;
+  mysql: MySQLCustomConfig;
   jwtSecret: string;
   jwtExpireMS: number;
   jwtRefreshExpireMS: number;
   origin: string;
 };
 
-const config: ConfigType = {
-  NODE_ENV: (process.env.NODE_ENV as NodeEnvType) ?? "localhost",
+const config: Config = {
+  NODE_ENV: (process.env.NODE_ENV as NodeEnvironment) ?? "localhost",
   sentryDSN: process.env.sentryDSN,
   port: process.env.port ?? 3000,
   redis: {

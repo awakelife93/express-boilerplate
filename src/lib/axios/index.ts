@@ -6,11 +6,11 @@ const generateQueryEndPoint = (
   endPoint: string,
   params: UnknownObject
 ): string => {
-  let _endPoint = `${endPoint}?`;
+  let _endPoint = `${endPoint}`;
 
   Object.keys(params).forEach((key: string, index: number) => {
     if (index === 0) {
-      _endPoint += `${key}=${params[key]}`;
+      _endPoint += `?${key}=${params[key]}`;
     } else {
       _endPoint += `&${key}=${params[key]}`;
     }

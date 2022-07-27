@@ -1,19 +1,17 @@
 import { User } from "@/entities/User";
-import { CommonStatusCode, CommonStatusMessage, getPayload } from "@/lib";
-import { PayLoadItemType } from "@/lib/middleware/jwt";
-import { CommonPromiseAPIResponseType } from "@/lib/type";
+import { CommonPromiseAPIResponse, CommonStatusCode, CommonStatusMessage, getPayload, PayLoadItem } from "@/lib";
 import AppRepository from "@/repository";
-import { QueryType } from "@/types/common";
-import { UserProfileType, UserRequestType } from "@/types/user";
+import { Query } from "@/types/common";
+import { UserProfile, UserRequest } from "@/types/user";
 import { onFailureHandler } from "@/utils";
 import _ from "lodash";
 import { Like } from "typeorm";
 import { signOut } from "./auth";
 
 export const findUserCount = async (
-  conditions: Partial<UserRequestType>
-): CommonPromiseAPIResponseType<number> => {
-  let query = {} as Partial<QueryType>;
+  conditions: Partial<UserRequest>
+): CommonPromiseAPIResponse<number> => {
+  let query = {} as Partial<Query>;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query = {
@@ -32,15 +30,15 @@ export const findUserCount = async (
 };
 
 export const findOneUser = async (
-  conditions: Partial<UserRequestType>
-): CommonPromiseAPIResponseType<User> => {
+  conditions: Partial<UserRequest>
+): CommonPromiseAPIResponse<User> => {
   return await AppRepository.User.findOne({ ...conditions });
 };
 
 export const findUser = async (
-  conditions: Partial<UserRequestType>
-): CommonPromiseAPIResponseType<[User[], number]> => {
-  let query = {} as QueryType;
+  conditions: Partial<UserRequest>
+): CommonPromiseAPIResponse<[User[], number]> => {
+  let query = {} as Query;
 
   if (!_.isUndefined(conditions.searchKeyword)) {
     query.where = [
@@ -69,7 +67,7 @@ export const findUser = async (
 
 export const createUser = async (
   conditions: User
-): CommonPromiseAPIResponseType<User> => {
+): CommonPromiseAPIResponse<User> => {
   let user = (await findOneUser({
     email: conditions.email,
   })) as User;
@@ -88,30 +86,30 @@ export const createUser = async (
 
 export const updateUser = async (
   conditions: Partial<User>
-): CommonPromiseAPIResponseType<User> => {
+): CommonPromiseAPIResponse<User> => {
   await AppRepository.User.update({ userId: conditions.userId }, conditions);
   return findOneUser({ userId: conditions.userId });
 };
 
 export const removeUser = async (
   conditions: Partial<User>
-): CommonPromiseAPIResponseType<object> => {
+): CommonPromiseAPIResponse<object> => {
   await AppRepository.User.softDelete({ userId: conditions.userId });
   return {};
 };
 
 export const tokenRemoveUser = async (
   token: string
-): CommonPromiseAPIResponseType<object> => {
-  const payload: PayLoadItemType = getPayload(token);
+): CommonPromiseAPIResponse<object> => {
+  const payload: PayLoadItem = getPayload(token);
   await removeUser({ userId: payload.userId });
   return await signOut(token);
 };
 
 export const findUserProfile = async (
   token: string
-): CommonPromiseAPIResponseType<UserProfileType> => {
-  const payload: PayLoadItemType = getPayload(token);
+): CommonPromiseAPIResponse<UserProfile> => {
+  const payload: PayLoadItem = getPayload(token);
   const user = (await findOneUser({ email: payload.email })) as User;
 
   return {
