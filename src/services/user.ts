@@ -1,5 +1,11 @@
 import { User } from "@/entities/User";
-import { CommonPromiseAPIResponse, CommonStatusCode, CommonStatusMessage, getPayload, PayLoadItem } from "@/lib";
+import {
+  CommonPromiseAPIResponse,
+  CommonStatusCode,
+  CommonStatusMessage,
+  getPayload,
+  PayLoadItem,
+} from "@/lib";
 import AppRepository from "@/repository";
 import { Query } from "@/types/common";
 import { UserProfile, UserRequest } from "@/types/user";

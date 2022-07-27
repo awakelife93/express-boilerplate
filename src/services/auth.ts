@@ -7,14 +7,14 @@ import {
   createToken,
   getPayload,
   PayLoadItem,
-  Redis
+  Redis,
 } from "@/lib";
 import { AuthRequest, AuthResponse } from "@/types/auth";
 import {
   compareSync,
   findPassword,
   generateRefreshTokenKey,
-  onFailureHandler
+  onFailureHandler,
 } from "@/utils";
 import _ from "lodash";
 import { findOneUser } from "./user";

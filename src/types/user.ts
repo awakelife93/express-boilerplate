@@ -6,9 +6,7 @@ type UserRequestSubOption = {
   nameSort: Sort;
 };
 
-export type UserRequest = UserRequestSubOption &
-  CommonRequest &
-  User;
+export type UserRequest = UserRequestSubOption & CommonRequest & User;
 
 export type UserParams = Omit<
   User,

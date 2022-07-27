@@ -6,7 +6,7 @@ import {
   createServer,
   generateTestData,
   initializeSentry,
-  Redis
+  Redis,
 } from "@/lib";
 import AppRepository from "@/repository";
 import { generateConfigLog } from "@/utils";

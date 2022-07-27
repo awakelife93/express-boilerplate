@@ -6,7 +6,7 @@ import {
   findContentsCount,
   findOneContents,
   removeContents,
-  updateContents
+  updateContents,
 } from "@/services/contents";
 import { ContentsRequest } from "@/types/contents";
 

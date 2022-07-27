@@ -8,7 +8,7 @@ import {
   findUserProfile,
   removeUser,
   tokenRemoveUser,
-  updateUser
+  updateUser,
 } from "@/services/user";
 import { UserProfile, UserRequest } from "@/types/user";
 
