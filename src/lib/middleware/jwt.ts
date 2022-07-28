@@ -81,9 +81,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
           };
         }
 
-        const refreshTokenPayload: TokenPayLoad = getTokenPayload(
-          refreshToken as string
-        );
+        const refreshTokenPayload: TokenPayLoad = getTokenPayload(refreshToken);
 
         if (_.isUndefined(refreshTokenPayload.exp)) {
           console.log(`===========> refresh token exp is undefined`);
