@@ -8,29 +8,26 @@ import { sampleUsers } from "./users";
 
 const generateTestData = async (): Promise<void> => {
   const generateContentsTable = (): void => {
-    sampleContents.forEach((item: ContentParams, index: number) => {
-      const contents = new Contents();
-
-      contents.title = item.title + index;
-      contents.subTitle = item.subTitle + index;
-      contents.description = item.description + index;
-      contents.imageLink = item.imageLink;
+    sampleContents.forEach(async (item: ContentParams, index: number) => {
+      const contents: Contents = await AppRepository.Contents.create({
+        title: item.title + index,
+        subTitle: item.subTitle + index,
+        description: item.description + index,
+        imageLink: item.imageLink
+      });
 
       AppRepository.Contents.save(contents);
     });
   };
 
   const generateUserTable = (): void => {
-    sampleUsers.forEach((item: UserParams, index: number) => {
-      const user = new User();
-
-      user.email = item.email + index;
-      user.name = item.name + index;
-      user.password = item.password;
-
-      if (index === 0) {
-        user.role = UserRole.ADMIN;
-      }
+    sampleUsers.forEach(async (item: UserParams, index: number) => {
+      const user: User = await AppRepository.User.create({
+        email: item.email + index,
+        name: item.name + index,
+        password: item.password,
+        role: index === 0 ? UserRole.ADMIN : UserRole.USER
+      });
 
       AppRepository.User.save(user);
     });
