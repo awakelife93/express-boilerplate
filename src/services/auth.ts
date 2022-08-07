@@ -7,14 +7,14 @@ import {
   createToken,
   getPayload,
   PayLoadItem,
-  Redis,
+  Redis
 } from "@/lib";
 import { AuthRequest, AuthResponse } from "@/types/auth";
 import {
   compareSync,
   findPassword,
   generateRefreshTokenKey,
-  onFailureHandler,
+  onFailureHandler
 } from "@/utils";
 import _ from "lodash";
 import { findOneUser } from "./user";
@@ -25,8 +25,14 @@ export const signIn = async (
   const user = (await findOneUser({
     email: conditions.email,
   })) as User;
+  
+  if (_.isUndefined(conditions.email) || _.isUndefined(conditions.password)) {
+    onFailureHandler({
+      status: CommonStatusCode.BAD_REQUEST,
+      message: CommonStatusMessage.BAD_REQUEST,
+    });
+  }
 
-  // DB 데이터 유효성 검사
   if (_.isUndefined(user)) {
     onFailureHandler({
       status: CommonStatusCode.NOT_FOUND,
@@ -34,7 +40,6 @@ export const signIn = async (
     });
   }
 
-  // 권한 검사
   if (conditions.role !== user.role) {
     onFailureHandler({
       status: CommonStatusCode.FORBIDDEN,
@@ -42,7 +47,6 @@ export const signIn = async (
     });
   }
 
-  // 패스워드 검사
   const password = await findPassword(user.userId);
   if (!compareSync(conditions.password, password)) {
     onFailureHandler({
@@ -57,7 +61,7 @@ export const signIn = async (
     jwtExpireMS: config.jwtRefreshExpireMS,
   });
 
-  // refreshToken 레디스 추가
+  // * refreshToken 레디스 추가
   Redis.set(generateRefreshTokenKey(user.email), refreshToken);
 
   return {
