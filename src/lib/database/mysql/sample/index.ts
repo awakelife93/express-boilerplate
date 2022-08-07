@@ -13,7 +13,7 @@ const generateTestData = async (): Promise<void> => {
         title: item.title + index,
         subTitle: item.subTitle + index,
         description: item.description + index,
-        imageLink: item.imageLink
+        imageLink: item.imageLink,
       });
 
       AppRepository.Contents.save(contents);
@@ -26,7 +26,7 @@ const generateTestData = async (): Promise<void> => {
         email: item.email + index,
         name: item.name + index,
         password: item.password,
-        role: index === 0 ? UserRole.ADMIN : UserRole.USER
+        role: index === 0 ? UserRole.ADMIN : UserRole.USER,
       });
 
       AppRepository.User.save(user);
