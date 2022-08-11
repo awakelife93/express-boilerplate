@@ -16,8 +16,6 @@ services:
       - MYSQL_PASSWORD=${mysqlPassword}
     ports:
       - "3306:3306"
-    networks:
-      - mysql_network
   redis:
       image: redis:alpine
       command: redis-server --port 6379
@@ -26,8 +24,6 @@ services:
         - "mode=standalone"
       ports:
         - "6379:6379"
-      networks:
-        - redis_network
   app:
     build:
       context: ./
@@ -51,11 +47,3 @@ services:
     depends_on:
       - redis
       - mysql
-    networks:
-      - mysql_network
-      - redis_network
-networks:
-  mysql_network:
-    driver: bridge
-  redis_network:
-    driver: bridge
