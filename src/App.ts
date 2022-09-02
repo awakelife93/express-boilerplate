@@ -6,7 +6,7 @@ import {
   createServer,
   generateTestData,
   initializeSentry,
-  Redis
+  Redis,
 } from "@/lib";
 import AppRepository from "@/repository";
 import { generateConfigLog } from "@/utils";
@@ -73,7 +73,7 @@ class App {
     };
 
     // * default localhost
-    return applications[config.NODE_ENV]
+    return applications[config.NODE_ENV];
   }
 
   async startApplication(): Promise<void> {
