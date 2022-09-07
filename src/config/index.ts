@@ -1,5 +1,4 @@
 import { NodeEnvironment, RedisConfig } from "@/lib";
-import "dotenv/config";
 import { MysqlConnectionOptions } from "typeorm/driver/mysql/MysqlConnectionOptions";
 
 type MySQLCustomConfig = Pick<
