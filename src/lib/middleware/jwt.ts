@@ -1,6 +1,6 @@
 import config from "@/config";
 import { CommonStatusCode, CommonStatusMessage, IRequest, Redis } from "@/lib";
-import { generateRefreshTokenKey } from "@/utils";
+import { generateRefreshTokenKey, getErrorItem } from "@/utils";
 import jwt from "jsonwebtoken";
 import _ from "lodash";
 
@@ -42,15 +42,13 @@ export const validateToken = async (request: IRequest): Promise<void> => {
   const token = request.token;
 
   if (!_.isUndefined(token)) {
-    /**
-     * 로그인 상태
-     */
     try {
       const now = new Date().getTime() / 1000;
       const jwtPayload: TokenPayLoad = getTokenPayload(token);
 
       if (_.isUndefined(jwtPayload.exp)) {
         console.log(`===========> token exp is undefined ${token}`);
+        
         throw {
           status: CommonStatusCode.UNAUTHORIZED,
           message: CommonStatusMessage.UNAUTHORIZED,
@@ -61,6 +59,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
         console.log(
           `===========> jwt token payload email is undefined ${token}`
         );
+
         throw {
           status: CommonStatusCode.INTERNAL_SERVER_ERROR,
           message: CommonStatusMessage.INTERNAL_SERVER_ERROR,
@@ -75,6 +74,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
 
         if (_.isNull(refreshToken)) {
           console.log(`===========> 1. refreshToken is null ${token}`);
+
           throw {
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
@@ -85,6 +85,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
 
         if (_.isUndefined(refreshTokenPayload.exp)) {
           console.log(`===========> refresh token exp is undefined`);
+
           throw {
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
@@ -98,6 +99,7 @@ export const validateToken = async (request: IRequest): Promise<void> => {
           console.log(
             `===========> jwt refresh token payload item is undefined ${refreshToken}`
           );
+
           throw {
             status: CommonStatusCode.INTERNAL_SERVER_ERROR,
             message: CommonStatusMessage.INTERNAL_SERVER_ERROR,
@@ -119,20 +121,22 @@ export const validateToken = async (request: IRequest): Promise<void> => {
             status: CommonStatusCode.UNAUTHORIZED,
             message: CommonStatusMessage.UNAUTHORIZED,
           };
-        } else {
-          // 토큰 연장
-          request.newToken = createToken({
-            userId: refreshTokenPayload.userId,
-            email: refreshTokenPayload.email,
-            jwtExpireMS: config.jwtExpireMS,
-          });
         }
+        
+        request.newToken = createToken({
+          userId: refreshTokenPayload.userId,
+          email: refreshTokenPayload.email,
+          jwtExpireMS: config.jwtExpireMS,
+        });
       }
     } catch (error: unknown) {
-      console.log(`===========> 3. ETC Error ${error} ${token}`);
+      const _error = getErrorItem(error);
+      
+      console.log(`===========> validateToken catch ${_error.message} ${token}`);
+      
       throw {
-        status: CommonStatusCode.UNAUTHORIZED,
-        message: CommonStatusMessage.UNAUTHORIZED,
+        status: _error.status ?? CommonStatusCode.UNAUTHORIZED,
+        message: _error.message ?? CommonStatusMessage.UNAUTHORIZED,
       };
     }
   }
