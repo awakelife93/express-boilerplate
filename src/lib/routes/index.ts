@@ -2,7 +2,7 @@ import {
   CommonStatusCode,
   initializeRouteLevelMiddleWare,
   IRequest,
-  IResponse,
+  IResponse
 } from "@/lib";
 import { getErrorItem } from "@/utils";
 import { Application, NextFunction } from "express";
@@ -20,23 +20,19 @@ const createRoute = (app: Application): void => {
           const result = await item.next(request, response);
           console.log(`SUCCESS_${_.toUpper(item.method)}_${item.path}`);
 
-          /**
-           * 새로 생성된 토큰이 있으면 요청에 대한 응답 + 새로운 토큰 발급
-           */
+          let status = result.status ?? CommonStatusCode.OK;
+          let data = { ...result };
+          
           if (!_.isUndefined(request.newToken)) {
-            response.status(CommonStatusCode.CREATE);
-            response.send({
-              token: request.newToken,
-              item: result,
-            });
-          } else {
-            response.status(result.status ?? CommonStatusCode.OK);
-            response.send({
-              item: result,
-            });
+            status = CommonStatusCode.CREATE;
+            data.token = request.token;
           }
+
+          response.status(status);
+          response.send({ item: data });
         } catch (error: unknown) {
           const _error = getErrorItem(error);
+          
           console.log(`ERROR_${_.toUpper(item.method)}_${item.path}`);
           console.log(_error);
           response.status(_error.status);
