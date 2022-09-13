@@ -135,8 +135,8 @@ export const validateToken = async (request: IRequest): Promise<void> => {
       console.log(`===========> validateToken catch ${_error.message} ${token}`);
       
       throw {
-        status: _error.status ?? CommonStatusCode.UNAUTHORIZED,
-        message: _error.message ?? CommonStatusMessage.UNAUTHORIZED,
+        status: _error.status,
+        message: _error.message,
       };
     }
   }
