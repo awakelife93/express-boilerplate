@@ -32,7 +32,7 @@ const config: Config = {
     port: process.env.mysqlPort ? Number(process.env.mysqlPort) : 3306,
     host: process.env.mysqlHost || "127.0.0.1",
     username: process.env.mysqlUserName,
-    database: process.env.mysqlDataBase,
+    database: process.env.mysqlDatabase,
     password: process.env.mysqlPassword,
   },
   jwtSecret: process.env.jwtSecret || "secret",

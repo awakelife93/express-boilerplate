@@ -11,7 +11,7 @@ services:
       # if you need my.cnf file, here...
     environment:
       - MYSQL_ROOT_PASSWORD=${mysqlRootPassword}
-      - MYSQL_DATABASE=${mysqlDataBase}
+      - MYSQL_DATABASE=${mysqlDatabase}
       - MYSQL_USER=${mysqlUserName}
       - MYSQL_PASSWORD=${mysqlPassword}
     ports:
@@ -35,7 +35,7 @@ services:
       mysqlHost: mysql
       mysqlPort: 3306
       mysqlUserName: ${mysqlUserName}
-      mysqlDataBase: ${mysqlDataBase}
+      mysqlDatabase: ${mysqlDatabase}
       mysqlPassword: ${mysqlPassword}
       # select app envierment (localhost, development, production) - default localhost
       NODE_ENV: ${NODE_ENV:-localhost}
