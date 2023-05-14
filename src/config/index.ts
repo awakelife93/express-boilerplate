@@ -16,6 +16,7 @@ export type Config = {
   jwtExpireMS: number;
   jwtRefreshExpireMS: number;
   origin: string;
+  isSetUpTestData: boolean;
 };
 
 // * Because variables are injected even in the Docker environment, || is used because it is an empty string rather than undefined.
@@ -46,6 +47,7 @@ const config: Config = {
     process.env.gatewayDomain && process.env.gatewayPort
       ? `http://${process.env.gatewayDomain}:${process.env.gatewayPort}`
       : "http://localhost:8080",
+  isSetUpTestData: process.env.isSetUpTestData === "true",
 };
 
 export default config;

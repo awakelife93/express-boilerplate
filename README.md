@@ -29,12 +29,13 @@ https://github.com/awakelife93/express-design-system-boilerplate
 2. This project did not create a separate Dto.
 3. The default environment for build and code level is the localhost environment.
 4. This project is oriented towards the Data Mapper pattern, not the Active Record pattern.
+5. Test data setup is false by default. (config.isSetUpTestData)
 ```
 
 ## Author
 
 ```
-2020.05.14 -> 
+2020.05.14 ->
 Author: Hyunwoo Park
 ```
 
